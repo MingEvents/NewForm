@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApp1.NavPageWindowe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="NavPageWindowe" Height="900" Width="1600"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent">
+    <Grid>
+
+        <!--// Window Border //-->
+
+        <Border Background="#212529"
+            CornerRadius="20" />
+
+        <Grid>
+
+            <!--// Base Grid //-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="456" />
+                <ColumnDefinition Width="1200" />
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+        </Grid>
+</Window>

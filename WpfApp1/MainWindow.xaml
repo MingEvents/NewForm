@@ -6,19 +6,23 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="900" 
+
+        Height="900"         
         Width="1600" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
         ResizeMode="NoResize">
 
     <Window.Resources>
+        
         <!-- Estilo personalizado para TextBox con línea inferior y Hint -->
         <Style TargetType="TextBox" x:Key="UnderlinedTextBox">
             <Setter Property="Template">
+                
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
+                            
                             <!-- Texto de sugerencia -->
                             <TextBlock Text="{TemplateBinding Tag}" 
                                        Foreground="Gray" 
@@ -44,9 +48,9 @@
 
     </Window.Resources>
 
-    <Grid Background="#576490">
+    <Grid Background="#576490"  >
         <!-- Fondo con degradado en la parte inferior -->
-        <Border Height="130" VerticalAlignment="Bottom">
+        <Border Height="130" VerticalAlignment="Bottom" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,0">
                     <GradientStop Color="#FF182848" Offset="0" />
@@ -58,7 +62,7 @@
         <!-- Contenido principal -->
         <DockPanel>
             <!-- Panel superior oscuro -->
-            <Border Height="80" Background="#576490" DockPanel.Dock="Top" />
+            <Border Height="80" Background="#576490" DockPanel.Dock="Top"  />
 
             <!-- Contenido principal -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-50,0,0">
