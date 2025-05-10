@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="WpfApp1.View.CreateEvent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             d:DesignHeight="900"
+             d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <vm:CreateEventVM />
+    </UserControl.DataContext>
+    <Grid Background="Transparent">
+        <!-- Fondo azul oscuro -->
+        <Border CornerRadius="10" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="20,0,-20,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Título -->
+                    <TextBlock Grid.ColumnSpan="2" Text="Crear Evento" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+                    <!-- Nombre del evento -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Nombre del evento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Precio -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Precio" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Plazas reservadas -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Plazas Reservadas" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding ReservedPlaces, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Fecha de inicio -->
+                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Fecha de Inicio" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Fecha fin -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Fecha de Fin" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Descripción -->
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Descripción" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- ID Establecimiento -->
+                    <StackPanel Grid.Row="4" Grid.Column="0" Margin="10">
+                        <TextBlock Text="ID Establecimiento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding EstablishId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Asientos asignados -->
+                    <StackPanel Grid.Row="4" Grid.Column="1" Margin="10">
+                        <TextBlock Text="¿Tiene asientos?" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <CheckBox IsChecked="{Binding Seating}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
+                    </StackPanel>
+
+                    <!-- Botón Crear -->
+                    <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Crear Evento" 
+                            Command="{Binding CreateEventCommand}" 
+                            Background="#1E90FF" 
+                            Foreground="White" 
+                            FontWeight="Bold" 
+                            Height="40" 
+                            Margin="0,20,0,0" 
+                            HorizontalAlignment="Center" 
+                            Width="180"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

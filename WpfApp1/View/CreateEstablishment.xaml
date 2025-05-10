@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="WpfApp1.View.CreateEstablishment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             d:DesignHeight="900"
+             d:DesignWidth="1200">
+
+    <UserControl.DataContext>
+        <vm:CreateEstablishmentVM />
+    </UserControl.DataContext>
+
+    <Grid Background="Transparent">
+        <!-- Fondo principal -->
+        <Border CornerRadius="10" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="20,0,-20,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Título -->
+                    <TextBlock Grid.ColumnSpan="2" Text="Crear Establecimiento" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+                    <!-- Nombre del establecimiento -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Nombre del Establecimiento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Dirección -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Dirección" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Direction, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Capacidad -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Capacidad" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Ciudad ID -->
+                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
+                        <TextBlock Text="ID de Ciudad" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding CityId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 FontSize="14"
+                                 BorderBrush="#CCC"
+                                 BorderThickness="1"
+                                 Background="LightGray"
+                                 Height="35"
+                                 Padding="10">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"/>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Botón Crear -->
+                    <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Crear Establecimiento" 
+                            Command="{Binding CreateEstablishmentCommand}" 
+                            Background="#1E90FF" 
+                            Foreground="White" 
+                            FontWeight="Bold" 
+                            Height="40" 
+                            Margin="0,20,0,0" 
+                            HorizontalAlignment="Center" 
+                            Width="200"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

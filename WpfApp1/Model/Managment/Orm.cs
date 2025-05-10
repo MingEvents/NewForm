@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using WpfApp1.Model;
 
-namespace TogetherNotes.Models
+namespace WpfApp1.Models
 {
     class Orm
     {
@@ -35,6 +35,11 @@ namespace TogetherNotes.Models
             }
 
             return message;
+        }
+
+        internal static string ErrorMessage(Exception ex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

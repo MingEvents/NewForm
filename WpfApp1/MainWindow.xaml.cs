@@ -74,6 +74,11 @@ namespace WpfApp1
             {
                 // User found, proceed with login
                 MessageBox.Show("Login successful!");
+                NavPageWindowe navPageWindow = new NavPageWindowe();
+                navPageWindow.Show();
+
+                // Cerrar la ventana actual
+                this.Close();
             }
             else
             {

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+                    xmlns:view="clr-namespace:WpfApp1.View">
+    <DataTemplate DataType="{x:Type vm:CreateUserVM}">
+        <view:CreateUser />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CreateEventVM}">
+        <view:CreateEvent />
+    </DataTemplate>
+
+</ResourceDictionary>
