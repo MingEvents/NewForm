@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              xmlns:vm="clr-namespace:WpfApp1.ViewModel"
              d:DesignHeight="900"
-             d:DesignWidth="1200">
+             d:DesignWidth="1200"
+             Style="{StaticResource Page_Style}">
+    
 
     <UserControl.DataContext>
         <vm:CreateEstablishmentVM />

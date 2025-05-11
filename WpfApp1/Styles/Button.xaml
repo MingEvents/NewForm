@@ -16,8 +16,8 @@
                 <ControlTemplate TargetType="RadioButton">
 
                     <Border x:Name="border"
-                            Height="50"
-                            Width="228"
+                            Height="100"
+                            Width="456"
                             BorderThickness="0">
 
                         <Border.Background>

@@ -101,7 +101,8 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
     <Compile Include="ViewModel\CreateEventVM.cs" />
-    <Compile Include="ViewModel\CreateEventVMcs.cs" />
+    <Compile Include="ViewModel\CreateEstablishmentVM.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\NavigationVM.cs" />
     <Compile Include="ViewModel\CreateUserVM.cs" />
     <Compile Include="View\CreateEstablishment.xaml.cs">
@@ -113,17 +114,12 @@
     <Compile Include="View\CreateUser.xaml.cs">
       <DependentUpon>CreateUser.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Page Include="NavPageWindowe.xaml">
       <SubType>Designer</SubType>
@@ -158,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,7 +244,13 @@
     <Resource Include="Images\logoIntermodular-Photoroom.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="userFavicon.png" />
     <Resource Include="Images\userFavicon.png" />
+    <Resource Include="establishmentFavicon.png" />
+    <Resource Include="Images\establismentFavicon.png" />
+    <Resource Include="establismentFavicon.png" />
+    <Resource Include="Images\CreateUserFavicon.png" />
+    <Resource Include="CreateUserFavicon.png" />
     <Content Include="Model\MingsEventsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MingsEventsModel.Context.cs</LastGenOutput>

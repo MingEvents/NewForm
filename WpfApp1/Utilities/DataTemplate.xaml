@@ -8,5 +8,13 @@
     <DataTemplate DataType="{x:Type vm:CreateEventVM}">
         <view:CreateEvent />
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:CreateEstablishmentVM}">
+        <view:CreateEstablishment />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:LoginVM}">
+        <view:LoginView />
+    </DataTemplate>
 
 </ResourceDictionary>

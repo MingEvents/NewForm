@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Models;
+using WpfApp1.Model;
 
 namespace WpfApp1.Model.Managment
 {
     public static class UsersOrm
     {
+        // Método para obtener todos los usuarios
         public static List<Users> SlectAllUsers()
         {
             List<Users> users = new List<Users>();
@@ -76,6 +78,25 @@ namespace WpfApp1.Model.Managment
                     return true;
                 }
                 return false; // Usuario no encontrado
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+        }
+
+        // ➤ NUEVO MÉTODO: Validar login de usuario
+        public static Users Login(string usernameOrEmail, string password)
+        {
+            try
+            {
+                // Busca el usuario por nombre de usuario o email
+                var user = Orm.db.Users
+                    .FirstOrDefault(u => (u.name == usernameOrEmail || u.email == usernameOrEmail)
+                                         && u.password == password);
+
+                return user; // Devuelve el usuario si coincide, sino null
             }
             catch (Exception ex)
             {

@@ -18,16 +18,18 @@
     </Window.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="34*"/>
+        </Grid.RowDefinitions>
 
-        <!--// Window Border //-->
-
+        <!-- Window Border -->
         <Border Background="#212529"
-            CornerRadius="20" />
+                CornerRadius="20" Grid.RowSpan="2" />
 
-        <Grid>
+        <Grid Grid.RowSpan="2">
 
-            <!--// Base Grid //-->
-
+            <!-- Base Grid -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="456" />
                 <ColumnDefinition Width="1200" />
@@ -36,12 +38,51 @@
             <Grid HorizontalAlignment="Left"
                   Width="456">
                 <Border Background="Black"
-                          CornerRadius="20,0,0,20" />
+                        CornerRadius="20,0,0,20" />
+
                 <StackPanel Height="600"
                             Width="456">
 
-                </StackPanel>
+                    <!-- Login -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding LoginCommand}"
+                              IsChecked="True">
+                        <Grid>
+                            <Image Source="/userFavicon.png"
+                                   Style="{StaticResource Image_Style}" Margin="25,22,0,0" VerticalAlignment="Top" />
+                            <TextBlock Text="Login"
+                                       Style="{StaticResource Text_Style}" Margin="134,0,0,0" />
+                        </Grid>
+                    </Menu:Btn>
 
+                    <!-- Create User -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                      Command="{Binding CreateUserCommand}">
+                                <Grid>
+                                    <Image Source="/CreateUserFavicon.png"
+                           Style="{StaticResource Image_Style}" Margin="26,26,0,0" VerticalAlignment="Top" />
+                                    <TextBlock Text="Crear Usuario"
+                               Style="{StaticResource Text_Style}" Margin="124,0,0,0" />
+                                </Grid> 
+                    </Menu:Btn>
+                    <!-- Create Establishment -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding CreateEstablishmentCommand}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="61*"/>
+                                <RowDefinition Height="39*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/establismentFavicon.png"
+                                   Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
+                            <TextBlock Text="Crear Establecimiento"
+                                       Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
+                        </Grid>
+                    </Menu:Btn>
+
+                    
+
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

@@ -22,12 +22,16 @@ namespace WpfApp1.ViewModel
         // Comandos para la navegación
         public ICommand CreateUserCommand { get; set; }
         public ICommand CreateEventCommand { get; set; }
-
+        public ICommand LoginCommand { get; set; }
+        public ICommand CreateEstablishmentCommand { get; set; }
 
 
         // Métodos para cambiar la vista
         private void NavigateToCreateUser(object obj) => CurrentView = new CreateUserVM();
         private void NavigateToCreateEvent(object obj) => CurrentView = new CreateEventVM();
+        private void NavigateToCreateEstablishment(object obj) => CurrentView = new CreateEstablishmentVM();
+
+        private void NavigateToLogin(object obj) => CurrentView = new LoginVM();
 
         // Constructor
         public NavigationVM()
@@ -35,8 +39,11 @@ namespace WpfApp1.ViewModel
             // Inicializa los comandos con sus respectivos métodos
             CreateUserCommand = new RelayCommand(NavigateToCreateUser);
             CreateEventCommand = new RelayCommand(NavigateToCreateEvent);
+            CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment);
+            LoginCommand = new RelayCommand(NavigateToLogin);
             // Vista inicial
-            CurrentView = new CreateUserVM();
+            CurrentView = new View.CreateUser(); // Carga directamente el UserControl
+                                                                                                  
         }
     }
 }
