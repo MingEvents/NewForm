@@ -23,9 +23,14 @@ namespace WpfApp1.Utilities
         {
             if (d is PasswordBox passwordBox)
             {
-                passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
-                passwordBox.Password = e.NewValue as string;
-                passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+                // Evitar bucles innecesarios al comparar el valor actual
+                string newPassword = e.NewValue as string;
+                if (passwordBox.Password != newPassword)
+                {
+                    passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+                    passwordBox.Password = newPassword;
+                    passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+                }
             }
         }
 
@@ -33,8 +38,14 @@ namespace WpfApp1.Utilities
         {
             if (sender is PasswordBox passwordBox)
             {
-                SetBindablePassword(passwordBox, passwordBox.Password);
+                // Evitar bucles innecesarios al comparar el valor actual
+                string currentPassword = GetBindablePassword(passwordBox);
+                if (passwordBox.Password != currentPassword)
+                {
+                    SetBindablePassword(passwordBox, passwordBox.Password);
+                }
             }
         }
+
     }
 }

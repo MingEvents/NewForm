@@ -23,5 +23,10 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void Btn_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

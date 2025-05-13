@@ -104,5 +104,25 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+
+        public static List<string> SlectAllRoles()
+        {
+            List<Role> roles = new List<Role>();
+            List<string> rolesName = new List<string>();
+            try
+            {
+                roles = Orm.db.Role.ToList();
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            foreach (Role role in roles)
+            {
+                rolesName.Add(role.name);
+            }
+            return rolesName;
+        }
     }
 }

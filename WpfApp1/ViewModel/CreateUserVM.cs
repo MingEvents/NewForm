@@ -3,6 +3,7 @@ using System.Windows.Input;
 using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
 using WpfApp1.Model;
+using System.Collections.Generic;
 
 namespace WpfApp1.ViewModel
 {
@@ -15,11 +16,18 @@ namespace WpfApp1.ViewModel
         private int _phone;
         private string _address;
         private DateTime? _birthDate;
+        private List<string> _roles;
+        private string _selectedRole;
 
         public string Name
         {
             get => _name;
             set { _name = value; OnPropertyChanged(); }
+        }
+        public List<string> Role
+        {
+            get => _roles;
+            set { _roles = value; OnPropertyChanged(); }
         }
 
         public string SecondName
@@ -28,6 +36,11 @@ namespace WpfApp1.ViewModel
             set { _username = value; OnPropertyChanged(); }
         }
 
+        public string SelectedRole
+        {
+            get => _selectedRole;
+            set { _selectedRole = value; OnPropertyChanged(); }
+        }
 
         public string Email
         {
@@ -64,10 +77,35 @@ namespace WpfApp1.ViewModel
         public CreateUserVM()
         {
             CreateUserCommand = new RelayCommand(ExecuteCreateUser);
+            LoadRoles();
+        }
+        private void LoadRoles()
+        {
+            try
+            {
+                Role = UsersOrm.SlectAllRoles();
+                OnPropertyChanged(nameof(Role));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+            }
         }
 
         private void ExecuteCreateUser(object obj)
         {
+            int roleId=11;
+            if (this.SelectedRole == "superAdmin")
+            {
+                roleId = 9;
+            }
+            else if (this.SelectedRole == "normalUser")
+            {
+                roleId = 10;
+            }
+
             try
             {
                 var newUser = new Users
@@ -77,6 +115,7 @@ namespace WpfApp1.ViewModel
                     email = this.Email,
                     password = this.Password,
                     phone = this.Phone,
+                    role_id = roleId,
                 };
 
                 UsersOrm.InsertUser(newUser);

@@ -35,14 +35,14 @@
 
                     <!-- Nombre Completo -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-                        <TextBlock Text="Nombre Completo" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBlock Text="Nombre" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
                         <TextBox Text="{Binding Name}" />
                     </StackPanel>
 
                     <!-- Nombre de Usuario -->
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
-                        <TextBlock Text="Nombre de Usuario" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Apellidos" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding SecondName, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Email -->
@@ -55,14 +55,14 @@
                     <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
                         <TextBlock Text="Contraseña" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
                         <PasswordBox 
-                            utils:PasswordHelper.BindablePassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="14"
-                            BorderBrush="#CCC"
-                            BorderThickness="1"
-                            
-                            Background="#D3D3D3"
-                            Height="35"
-                            Padding="0,3,0,0" Foreground="Black">
+                                utils:PasswordHelper.BindablePassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="14"
+                                BorderBrush="#CCC"
+                                BorderThickness="1"
+                                Background="#D3D3D3"
+                                Height="35"
+                                Padding="0,3,0,0"
+                                Foreground="Black">
                             <PasswordBox.Template>
                                 <ControlTemplate TargetType="PasswordBox">
                                     <Border Background="{TemplateBinding Background}"
@@ -84,6 +84,18 @@
                     <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
                         <TextBlock Text="Teléfono" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
                         <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <!-- Roles -->
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Rol" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <ComboBox ItemsSource="{Binding Role}" 
+                            SelectedItem="{Binding SelectedRole, Mode=TwoWay}" 
+                            FontSize="14" 
+                            BorderBrush="#CCC" 
+                            BorderThickness="1" 
+                            Background="#D3D3D3" 
+                            Height="35" 
+                            Foreground="Black"/>
                     </StackPanel>
 
                     <!-- Botón Crear -->

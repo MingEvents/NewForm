@@ -93,13 +93,25 @@
                                  Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
                                 </Grid>
                     </Menu:Btn>
+                    <!-- Manage Users-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                    Command="{Binding ManageUsersCommand}" Checked="Btn_Checked">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="61*"/>
+                                            <RowDefinition Height="39*"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="/establismentFavicon.png"
+                         Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
+                                        <TextBlock Text="Manejar Usuarios"
+                             Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
+                                    </Grid> 
+                    </Menu:Btn>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}" />
-
             </Grid>
 
         </Grid>

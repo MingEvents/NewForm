@@ -1,12 +1,71 @@
-﻿<Window x:Class="WpfApp1.View.ManageUsers"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1.View"
-        mc:Ignorable="d"
-        Title="ManageUsers" Height="900" Width="1200">
-    <Grid>
-        
+﻿<UserControl x:Class="WpfApp1.View.ManageUsers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             d:DesignHeight="900"
+             d:DesignWidth="1200">
+
+    <UserControl.DataContext>
+        <vm:ManageUsersVM />
+    </UserControl.DataContext>
+
+    <Grid Background="#576490">
+        <!-- Contenedor principal -->
+        <Border CornerRadius="10" Background="#F5F5F5" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Título -->
+                    <TextBlock Text="Gestionar Usuarios" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                    <!-- Lista de usuarios -->
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding UsersList}"
+                             SelectedItem="{Binding SelectedUser}"
+                             DisplayMemberPath="name"
+                             BorderBrush="#CCC"
+                             BorderThickness="1"
+                             Background="White"
+                             Foreground="Black"
+                             Margin="20"
+                             FontSize="16"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    </ListBox>
+
+                    <!-- Botón Eliminar -->
+                    <Button Grid.Row="2"
+                            Content="Eliminar Usuario"
+                            Command="{Binding DeleteUserCommand}"
+                            Background="#D94448"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Height="40"
+                            Width="200"
+                            HorizontalAlignment="Center"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+        </Border>
     </Grid>
-</Window>
+</UserControl>

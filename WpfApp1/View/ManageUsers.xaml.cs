@@ -17,7 +17,7 @@ namespace WpfApp1.View
     /// <summary>
     /// Lógica de interacción para ManageUsers.xaml
     /// </summary>
-    public partial class ManageUsers : Window
+    public partial class ManageUsers : UserControl
     {
         public ManageUsers()
         {
