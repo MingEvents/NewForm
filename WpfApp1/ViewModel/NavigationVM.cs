@@ -38,12 +38,18 @@ namespace WpfApp1.ViewModel
         {
             // Inicializa los comandos con sus respectivos métodos
             CreateUserCommand = new RelayCommand(NavigateToCreateUser);
-            CreateEventCommand = new RelayCommand(NavigateToCreateEvent);
+            CreateEventCommand = new RelayCommand(NavigateToCreateEvent, CanNavigate);
             CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment);
             LoginCommand = new RelayCommand(NavigateToLogin);
             // Vista inicial
-            CurrentView = new View.CreateUser(); // Carga directamente el UserControl
+            CurrentView = new CreateUserVM(); // Carga directamente el UserControl
                                                                                                   
         }
+        private bool CanNavigate(object obj)
+        {
+            // Lógica para habilitar o deshabilitar el comando
+            return true; // Siempre habilitado en este caso
+        }
+
     }
 }

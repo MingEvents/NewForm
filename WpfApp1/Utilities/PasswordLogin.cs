@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace WpfApp1.Utilities
 {
-    public static class PasswordHelper
+    public static class PasswordLogin
     {
         public static readonly DependencyProperty BindablePasswordProperty =
             DependencyProperty.RegisterAttached("BindablePassword", typeof(string), typeof(PasswordHelper),

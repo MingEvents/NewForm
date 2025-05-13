@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             xmlns:utils="clr-namespace:WpfApp1.Utilities"
              mc:Ignorable="d"
              d:DesignHeight="900" d:DesignWidth="1200">
 
@@ -25,7 +26,7 @@
                                        VerticalAlignment="Center" 
                                        Margin="0,0,0,0" 
                                        IsHitTestVisible="False" 
-                                       Visibility="Visible"/>
+                                       Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringToVisibilityConverter}}" />
                             <!-- Caja de texto -->
                             <Border BorderThickness="0,0,0,1" BorderBrush="White">
                                 <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
@@ -39,6 +40,36 @@
             <Setter Property="CaretBrush" Value="White" />
             <Setter Property="FontSize" Value="24" />
         </Style>
+
+        <!-- Estilo personalizado para PasswordBox con línea inferior y Hint -->
+        <Style TargetType="PasswordBox" x:Key="UnderlinedPasswordBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Grid>
+                            <!-- Texto de sugerencia -->
+                            <TextBlock Text="{TemplateBinding Tag}" 
+                                       Foreground="Gray" 
+                                       VerticalAlignment="Center" 
+                                       Margin="0,0,0,0" 
+                                       IsHitTestVisible="False" 
+                                       Visibility="{Binding Password, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringToVisibilityConverter}}" />
+                            <!-- Caja de contraseña -->
+                            <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="CaretBrush" Value="White" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+
+        <!-- Convertidor para mostrar/ocultar el hint -->
+        <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid Background="#576490">
@@ -86,25 +117,24 @@
                                TextAlignment="Center"
                                FontSize="64"
                                FontFamily="pack://application:,,,/Fonts/Rubik-Medium.ttf#Rubik Medium" />
-
                     <!-- Campo Usuario -->
                     <StackPanel Orientation="Horizontal" Margin="20">
                         <TextBlock Text="User" Foreground="White" VerticalAlignment="Center" Margin="20,0,10,0" />
                         <TextBox x:Name="txtUsername"
-                                 Style="{StaticResource UnderlinedTextBox}"
-                                 Tag="Enter Username / Email"
-                                 Width="600"
-                                 Text="{Binding UsernameOrEmail, UpdateSourceTrigger=PropertyChanged}" />
+                             Style="{StaticResource UnderlinedTextBox}"
+                             Tag="Enter Username / Email"
+                             Width="600"
+                             Text="{Binding UsernameOrEmail, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Campo Contraseña -->
                     <StackPanel Orientation="Horizontal" Margin="20">
                         <TextBlock Text="Password" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0" />
-                        <TextBox x:Name="txtPassword"
-                                 Style="{StaticResource UnderlinedTextBox}"
-                                 Tag="Enter Password"
-                                 Width="600"
-                                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+                        <PasswordBox x:Name="txtPassword"
+                        Width="600"
+                        utils:PasswordHelper.BindablePassword="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                        Tag="Enter Password"
+                        Style="{StaticResource UnderlinedPasswordBox}" />
                     </StackPanel>
 
                     <!-- Botón Login -->

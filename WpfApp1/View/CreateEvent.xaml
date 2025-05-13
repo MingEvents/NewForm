@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              xmlns:vm="clr-namespace:WpfApp1.ViewModel"
              d:DesignHeight="900"
-             d:DesignWidth="1200">
+             d:DesignWidth="1200"
+             Style="{StaticResource Page_Style}">
+
     <UserControl.DataContext>
         <vm:CreateEventVM />
     </UserControl.DataContext>
@@ -29,153 +31,59 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Título -->
-                    <TextBlock Grid.ColumnSpan="2" Text="Crear Evento" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                    <TextBlock Grid.ColumnSpan="2" Text="Crear Evento" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,30"/>
 
                     <!-- Nombre del evento -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                         <TextBlock Text="Nombre del evento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Precio -->
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
                         <TextBlock Text="Precio" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
                     </StackPanel>
 
                     <!-- Plazas reservadas -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
                         <TextBlock Text="Plazas Reservadas" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding ReservedPlaces, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding ReservedPlaces, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
                     </StackPanel>
 
                     <!-- Fecha de inicio -->
                     <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
                         <TextBlock Text="Fecha de Inicio" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Fecha fin -->
                     <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
                         <TextBlock Text="Fecha de Fin" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Descripción -->
                     <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
                         <TextBlock Text="Descripción" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
-                    <!-- ID Establecimiento -->
+                    <!-- Seleccionar Establecimiento -->
                     <StackPanel Grid.Row="4" Grid.Column="0" Margin="10">
-                        <TextBlock Text="ID Establecimiento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding EstablishId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBlock Text="Establecimiento" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <ComboBox ItemsSource="{Binding AllEstablishments}"
+                                  SelectedItem="{Binding SelectedEstablishment}"
+                                  DisplayMemberPath="name"
+                                  SelectedValuePath="establish_id"
+                                  FontSize="14"
+                                  BorderBrush="#CCC"
+                                  BorderThickness="1"
+                                  Background="LightGray"
+                                  Height="35"
+                                  Padding="10"
+                                  Foreground="Black">
+                        </ComboBox>
                     </StackPanel>
 
                     <!-- Asientos asignados -->

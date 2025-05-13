@@ -7,13 +7,14 @@
              xmlns:vm="clr-namespace:WpfApp1.ViewModel"
              d:DesignHeight="900"
              d:DesignWidth="1200"
-             xmlns:utils="clr-namespace:WpfApp1.Utilities">
+             xmlns:utils="clr-namespace:WpfApp1.Utilities"
+             Style="{StaticResource Page_Style}">
 
     <UserControl.DataContext>
         <vm:CreateUserVM />
     </UserControl.DataContext>
 
-    <Grid Background="#576490" >
+    <Grid Background="#576490">
         <Border CornerRadius="10" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="20,0,-20,0">
                 <Grid>
@@ -35,64 +36,19 @@
                     <!-- Nombre Completo -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
                         <TextBlock Text="Nombre Completo" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Name}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10" Foreground="White">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Name}" />
                     </StackPanel>
 
                     <!-- Nombre de Usuario -->
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
                         <TextBlock Text="Nombre de Usuario" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10" Foreground="White">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Email -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
                         <TextBlock Text="Email" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#FFF9F8F8"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10" Foreground="#E3FFFFFF">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Contraseña -->
@@ -103,15 +59,22 @@
                             FontSize="14"
                             BorderBrush="#CCC"
                             BorderThickness="1"
+                            
                             Background="#D3D3D3"
                             Height="35"
-                            Padding="10" Foreground="White">   
+                            Padding="0,3,0,0" Foreground="Black">
                             <PasswordBox.Template>
                                 <ControlTemplate TargetType="PasswordBox">
                                     <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="10"/>     
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10">
+                                        <ScrollViewer x:Name="PART_ContentHost"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top"
+                                              Margin="4,2"
+                                              Background="Transparent" />
+                                    </Border>
                                 </ControlTemplate>
                             </PasswordBox.Template>
                         </PasswordBox>
@@ -120,22 +83,7 @@
                     <!-- Teléfono -->
                     <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
                         <TextBlock Text="Teléfono" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="14"
-                                 BorderBrush="#CCC"
-                                 BorderThickness="1"
-                                 Background="LightGray"
-                                 Height="35"
-                                 Padding="10" Foreground="White">
-                            <TextBox.Template>
-                                <ControlTemplate TargetType="TextBox">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="10"/>
-                                </ControlTemplate>
-                            </TextBox.Template>
-                        </TextBox>
+                        <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Botón Crear -->

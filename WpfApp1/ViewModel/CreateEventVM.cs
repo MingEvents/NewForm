@@ -3,6 +3,8 @@ using System.Windows.Input;
 using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
 using WpfApp1.Model;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace WpfApp1.ViewModel
 {
@@ -17,6 +19,8 @@ namespace WpfApp1.ViewModel
         private bool _seating;
         private string _description;
         private int _establishId;
+        private List<Establishment> _allEstablishments;
+        private Establishment _selectedEstablishment;
 
         public string Name
         {
@@ -72,11 +76,43 @@ namespace WpfApp1.ViewModel
             set { _establishId = value; OnPropertyChanged(); }
         }
 
+        public List<Establishment> AllEstablishments
+        {
+            get => _allEstablishments;
+            set
+            {
+                _allEstablishments = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Establishment SelectedEstablishment
+        {
+            get => _selectedEstablishment;
+            set
+            {
+                _selectedEstablishment = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand CreateEventCommand { get; }
 
         public CreateEventVM()
         {
             CreateEventCommand = new RelayCommand(ExecuteCreateEvent);
+            LoadEstablishments();
+
+        }
+        private void LoadEstablishments()
+        {
+            try
+            {
+                AllEstablishments = EstablishmentOrm.SelectAllEstablishments();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ExecuteCreateEvent(object obj)
@@ -93,7 +129,7 @@ namespace WpfApp1.ViewModel
                     end_date = this.EndDate,
                     seating = this.Seating,
                     descripcion = this.Description,
-                    establish_id = this.EstablishId
+                    establish_id = this.SelectedEstablishment.establish_id,
                 };
 
                 EventOrm.InsertEvent(newEvent);

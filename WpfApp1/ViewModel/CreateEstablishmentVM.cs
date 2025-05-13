@@ -5,12 +5,12 @@ using WpfApp1.Utilities;
 
 namespace WpfApp1.ViewModel
 {
-    public class CreateEstablishmentVM : ViewModelBase
+    public class CreateEstablishmentVM : Utilities.ViewModelBase
     {
         private string _name;
         private string _direction;
-        private int _capacity;
-        private int _cityId;
+        private string _capacity;
+        private string _cityId;
 
         #region Propiedades
 
@@ -26,18 +26,25 @@ namespace WpfApp1.ViewModel
             set { _direction = value; OnPropertyChanged(); }
         }
 
-        public int Capacity
+        public string Capacity
         {
             get => _capacity;
-            set { _capacity = value; OnPropertyChanged(); }
+            set
+            {
+                _capacity = value;
+                OnPropertyChanged();
+            }
         }
 
-        public int CityId
+        public string CityId
         {
             get => _cityId;
-            set { _cityId = value; OnPropertyChanged(); }
+            set
+            {
+                _cityId = value;
+                OnPropertyChanged();
+            }
         }
-
         #endregion
 
         #region Comandos
@@ -65,10 +72,10 @@ namespace WpfApp1.ViewModel
                 {
                     name = this.Name,
                     direction = this.Direction,
-                    capacity = this.Capacity,
-                    city_id = this.CityId
+                    capacity = int.Parse(this.Capacity),
+                    city_id = int.Parse(this.CityId)
                 };
-
+           
                 EstablishmentOrm.InsertEstablishment(newEstablishment);
 
                 ClearFields();
@@ -85,8 +92,8 @@ namespace WpfApp1.ViewModel
         {
             Name = string.Empty;
             Direction = string.Empty;
-            Capacity = 0;
-            CityId = 0;
+            Capacity = "";
+            CityId = "";
         }
 
         #endregion

@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace WpfApp1.View
 {
     /// <summary>
-    /// Lógica de interacción para CreateEvent.xaml
+    /// Lógica de interacción para ManageUsers.xaml
     /// </summary>
-    public partial class CreateEvent : UserControl
+    public partial class ManageUsers : Window
     {
-        public CreateEvent()
+        public ManageUsers()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
