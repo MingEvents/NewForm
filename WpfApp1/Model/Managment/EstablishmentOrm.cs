@@ -94,5 +94,44 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+        public static List<string> selectAllCities()
+        {
+            List<City> cities = new List<City>();
+            List<string> citiesName = new List<string>();
+            try
+            {
+                cities = Orm.db.City.ToList();
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+
+            foreach (var city in cities)
+            {
+                citiesName.Add(city.name);
+            }
+            return citiesName;
+
+        }
+        public static int SlectCityId(string cityName)
+        {
+            int cityId = 0;
+            try
+            {
+                var city = Orm.db.City.FirstOrDefault(c => c.name == cityName);
+                if (city != null)
+                {
+                    cityId = city.city_id;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            return cityId;
+        }
     }
 }

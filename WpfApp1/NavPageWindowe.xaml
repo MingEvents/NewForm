@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="NavPageWindowe" Height="900" Width="1600"
+        Title="NavPageWindowe" Height="900" Width="1601"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -37,7 +37,7 @@
 
             <Grid HorizontalAlignment="Left"
                   Width="456">
-                <Border Background="Black"
+                <Border Background="#FF071D2B"
                         CornerRadius="20,0,0,20" />
 
                 <StackPanel Height="600"

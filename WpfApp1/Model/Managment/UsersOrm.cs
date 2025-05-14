@@ -50,6 +50,10 @@ namespace WpfApp1.Model.Managment
                 var existingUser = Orm.db.Users.Find(user.user_id);
                 if (existingUser != null)
                 {
+                    existingUser.phone = user.phone;
+                    existingUser.password = user.password;
+                    existingUser.second_name = user.second_name;ç
+
                     existingUser.name = user.name;
                     existingUser.email = user.email;
                     // Actualiza otros campos según sea necesario
@@ -123,6 +127,24 @@ namespace WpfApp1.Model.Managment
                 rolesName.Add(role.name);
             }
             return rolesName;
+        }
+        public static int SlectRoleId(string roleName)
+        {
+            int roleId = 0;
+            try
+            {
+                var role = Orm.db.Role.FirstOrDefault(r => r.name == roleName);
+                if (role != null)
+                {
+                    roleId = role.role_id;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            return roleId;
         }
     }
 }

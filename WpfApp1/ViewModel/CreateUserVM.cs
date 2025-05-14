@@ -96,15 +96,10 @@ namespace WpfApp1.ViewModel
 
         private void ExecuteCreateUser(object obj)
         {
-            int roleId=11;
-            if (this.SelectedRole == "superAdmin")
-            {
-                roleId = 9;
-            }
-            else if (this.SelectedRole == "normalUser")
-            {
-                roleId = 10;
-            }
+            int roleId;
+
+            roleId = UsersOrm.SlectRoleId(SelectedRole);
+
 
             try
             {

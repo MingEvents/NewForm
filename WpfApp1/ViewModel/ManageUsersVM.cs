@@ -11,7 +11,10 @@ namespace WpfApp1.ViewModel
     public class ManageUsersVM : ViewModelBase
     {
         private Users _selectedUser;
-
+        private string _name;
+        private string _email;
+        private string _phone;
+        private int? _roleId;
         #region Propiedades
 
         public ObservableCollection<Users> UsersList { get; set; }
@@ -21,9 +24,36 @@ namespace WpfApp1.ViewModel
             get => _selectedUser;
             set
             {
+                Name = _selectedUser.name;
+                Email = _selectedUser.email;
+                Phone = _selectedUser.phone.ToString(); 
+                RoleId = _selectedUser.role_id; 
                 _selectedUser = value;
                 OnPropertyChanged();
             }
+        }
+        public string Name
+        {
+            get => _name;
+            set { _name = value; OnPropertyChanged(); }
+        }
+
+        public string Email
+        {
+            get => _email;
+            set { _email = value; OnPropertyChanged(); }
+        }
+
+        public string Phone
+        {
+            get => _phone;
+            set { _phone = value; OnPropertyChanged(); }
+        }
+
+        public int? RoleId
+        {
+            get => _roleId;
+            set { _roleId = value; OnPropertyChanged(); }
         }
 
         #endregion

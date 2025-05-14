@@ -14,7 +14,7 @@
 
     <Grid Background="#576490">
         <!-- Contenedor principal -->
-        <Border CornerRadius="10" Background="#F5F5F5" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border CornerRadius="20" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -23,26 +23,28 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="700px"/>
                         <ColumnDefinition Width="*"/>
+
                     </Grid.ColumnDefinitions>
 
                     <!-- Título -->
                     <TextBlock Text="Gestionar Usuarios" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
                     <!-- Lista de usuarios -->
-                    <ListBox Grid.Row="1"
+                    <ListBox Grid.Row="1"                             
                              ItemsSource="{Binding UsersList}"
                              SelectedItem="{Binding SelectedUser}"
                              DisplayMemberPath="name"
                              BorderBrush="#CCC"
                              BorderThickness="1"
-                             Background="White"
-                             Foreground="Black"
+                             Background="#FFA3BCF9"
+                             Foreground="Black"                            
                              Margin="20"
                              FontSize="16"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="ListBox_SelectionChanged">
                     </ListBox>
-
+                    
                     <!-- Botón Eliminar -->
                     <Button Grid.Row="2"
                             Content="Eliminar Usuario"

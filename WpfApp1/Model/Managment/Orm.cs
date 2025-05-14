@@ -39,7 +39,27 @@ namespace WpfApp1.Models
 
         internal static string ErrorMessage(Exception ex)
         {
-            throw new NotImplementedException();
+            string message = "";
+            /*
+            switch (ex.GetType().Name)
+            {
+                case "SqlException":
+                    SqlException sqlException = (SqlException)ex;
+                    message = ErrorMessage(sqlException);
+                    break;
+                case "InvalidOperationException":
+                    message = "Invalid operation.";
+                    break;
+                case "ArgumentNullException":
+                    message = "Null argument.";
+                    break;
+                default:
+                    message = ex.Message;
+                    break;
+            }
+            */
+            return message;
+            // throw new NotImplementedException();
         }
     }
 }

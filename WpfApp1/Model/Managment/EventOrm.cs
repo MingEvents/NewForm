@@ -99,5 +99,6 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+
     }
 }

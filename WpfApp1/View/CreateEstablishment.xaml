@@ -31,7 +31,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Título -->
-                    <TextBlock Grid.ColumnSpan="2" Text="Crear Establecimiento" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                    <TextBlock Grid.ColumnSpan="2" Text="Crear Establecimiento" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,30"/>
 
                     <!-- Nombre del establecimiento -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
@@ -50,11 +50,17 @@
                         <TextBlock Text="Capacidad" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
                         <TextBox Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
                     </StackPanel>
-
-                    <!-- Ciudad ID -->
+                    <!-- Lista de ciudades -->
                     <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
-                        <TextBlock Text="ID de Ciudad" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding CityId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
+                        <TextBlock Text="Rol" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <ComboBox ItemsSource="{Binding City}" 
+                        SelectedItem="{Binding SelectedCity, Mode=TwoWay}" 
+                        FontSize="14" 
+                        BorderBrush="#CCC" 
+                        BorderThickness="1" 
+                        Background="#D3D3D3" 
+                        Height="35" 
+                        Foreground="Black"/>        
                     </StackPanel>
 
                     <!-- Botón Crear -->

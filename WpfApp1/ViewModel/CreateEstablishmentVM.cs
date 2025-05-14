@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
@@ -10,8 +11,8 @@ namespace WpfApp1.ViewModel
         private string _name;
         private string _direction;
         private string _capacity;
-        private string _cityId;
-
+        private List<string> _cities;
+        private string _selectedCity;
         #region Propiedades
 
         public string Name
@@ -36,12 +37,21 @@ namespace WpfApp1.ViewModel
             }
         }
 
-        public string CityId
+        public List<string> City
         {
-            get => _cityId;
+            get => _cities;
             set
             {
-                _cityId = value;
+                _cities = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SelectedCity
+        {
+            get => _selectedCity;
+            set
+            {
+                _selectedCity = value;
                 OnPropertyChanged();
             }
         }
@@ -58,6 +68,7 @@ namespace WpfApp1.ViewModel
         public CreateEstablishmentVM()
         {
             CreateEstablishmentCommand = new RelayCommand(ExecuteCreateEstablishment);
+            LoadAllCities();
         }
 
         #endregion
@@ -66,6 +77,7 @@ namespace WpfApp1.ViewModel
 
         private void ExecuteCreateEstablishment(object obj)
         {
+            int cityId = EstablishmentOrm.SlectCityId(SelectedCity);
             try
             {
                 var newEstablishment = new Model.Establishment
@@ -73,7 +85,7 @@ namespace WpfApp1.ViewModel
                     name = this.Name,
                     direction = this.Direction,
                     capacity = int.Parse(this.Capacity),
-                    city_id = int.Parse(this.CityId)
+                    city_id = cityId
                 };
            
                 EstablishmentOrm.InsertEstablishment(newEstablishment);
@@ -87,13 +99,28 @@ namespace WpfApp1.ViewModel
                     System.Windows.MessageBoxImage.Error);
             }
         }
+        private List<string> LoadAllCities()
+        {
+            try
+            {
+                var cities = EstablishmentOrm.selectAllCities();
+                City = cities;
+                return cities;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+                return null;
+            }
+        }
 
         private void ClearFields()
         {
             Name = string.Empty;
             Direction = string.Empty;
             Capacity = "";
-            CityId = "";
         }
 
         #endregion

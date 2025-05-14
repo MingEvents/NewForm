@@ -14,7 +14,13 @@ namespace WpfApp1.Utilities
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is Visibility visibility)
+            {
+                return visibility == Visibility.Visible ? string.Empty : null;
+            }
+            return null;
+            // Si no se necesita la conversión inversa, puedes lanzar una excepción o devolver un valor predeterminado.
+            //   throw new NotImplementedException();
         }
     }
 }
