@@ -52,7 +52,7 @@ namespace WpfApp1.Model.Managment
                 {
                     existingUser.phone = user.phone;
                     existingUser.password = user.password;
-                    existingUser.second_name = user.second_name;ç
+                    existingUser.second_name = user.second_name;
 
                     existingUser.name = user.name;
                     existingUser.email = user.email;
@@ -86,7 +86,7 @@ namespace WpfApp1.Model.Managment
             catch (Exception ex)
             {
                 string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
+                throw new Exception("El usuario tiene reservas activas");
             }
         }
 

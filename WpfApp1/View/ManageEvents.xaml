@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="WpfApp1.View.ManageEvents"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             d:DesignHeight="900"
+             d:DesignWidth="1200">
+
+    <UserControl.DataContext>
+        <vm:ManageEventsVM />
+    </UserControl.DataContext>
+
+    <Grid Background="#576490">
+        <!-- Contenedor principal -->
+        <Border CornerRadius="20" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="700"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Título -->
+                    <TextBlock Grid.ColumnSpan="2" 
+                               Text="Gestionar Eventos" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="#1E3A5F" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,20"/>
+
+                    <!-- Lista de eventos -->
+                    <ListBox Grid.Row="1" 
+                             Grid.Column="0"
+                             ItemsSource="{Binding EventsList}"
+                             SelectedItem="{Binding SelectedEvent}"
+                             DisplayMemberPath="name"
+                             BorderBrush="#CCC"
+                             BorderThickness="1"
+                             Background="Transparent"
+                             Foreground="Black"
+                             Margin="20"
+                             FontSize="16"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                    <!-- Panel de edición -->
+                    <StackPanel Grid.Row="1" 
+                                Grid.Column="1"
+                                Margin="10,20,20,0"
+                                Background="#576490">
+                        <TextBlock Text="Detalles del Evento" 
+                                   FontSize="20" 
+                                   FontWeight="Bold" 
+                                   Foreground="#1E3A5F" 
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Campo Nombre -->
+                        <TextBlock Text="Nombre del Evento:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Campo Precio -->
+                        <TextBlock Text="Precio:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Plazas Reservadas -->
+                        <TextBlock Text="Plazas Reservadas:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding ReservedPlaces, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Fecha de inicio -->
+                        <TextBlock Text="Fecha de Inicio:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Fecha Fin -->
+                        <TextBlock Text="Fecha de Fin:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Descripción -->
+                        <TextBlock Text="Descripción:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- ID Establecimiento -->
+                        <TextBlock Text="ID de Establecimiento:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding EstablishId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Tiene asientos -->
+                        <TextBlock Text="¿Tiene asientos?" FontWeight="Bold" Foreground="White"/>
+                        <CheckBox IsChecked="{Binding Seating}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,20"/>
+
+                        <!-- Botones -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Actualizar Evento"
+                                    Command="{Binding UpdateEventCommand}"
+                                    Background="#1E90FF"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Height="40"
+                                    Width="160"
+                                    Cursor="Hand"
+                                    Margin="0,10,20,0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="10">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Content="Eliminar Evento"
+                                    Command="{Binding DeleteEventCommand}"
+                                    Background="#D94448"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Height="40"
+                                    Width="160"
+                                    Cursor="Hand"
+                                    Margin="0,10,0,0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="10">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

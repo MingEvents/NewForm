@@ -25,15 +25,33 @@ namespace WpfApp1.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand CreateEstablishmentCommand { get; set; }
         public ICommand ManageUsersCommand { get; set; } // Comando para gestionar usuarios
+        public ICommand ManageEventsCommand { get; set; }
 
 
         // Métodos para cambiar la vista
-        private void NavigateToCreateUser(object obj) => CurrentView = new CreateUserVM();
-        private void NavigateToCreateEvent(object obj) => CurrentView = new CreateEventVM();
-        private void NavigateToCreateEstablishment(object obj) => CurrentView = new CreateEstablishmentVM();
-
-        private void NavigateToLogin(object obj) => CurrentView = new LoginVM();
-        private void NavigateToManageUsers(object obj) => CurrentView = new ManageUsersVM(); // Método para gestionar usuarios
+        private void NavigateToCreateUser(object obj)
+        {
+            CurrentView = new CreateUserVM(); 
+        }
+        private void NavigateToCreateEvent(object obj) { 
+            CurrentView = new CreateEventVM(); 
+        }
+        private void NavigateToCreateEstablishment(object obj)
+        {
+            CurrentView = new CreateEstablishmentVM();
+        }
+        private void NavigateToManageEvents(object obj)
+        {
+            CurrentView = new ManageEventsVM();
+        }
+        private void NavigateToLogin(object obj)
+        {
+            CurrentView = new LoginVM();
+        }
+        private void NavigateToManageUsers(object obj)
+        {
+            CurrentView = new ManageUsersVM();
+        }// Método para gestionar usuarios
 
         // Constructor
         public NavigationVM()
@@ -44,6 +62,7 @@ namespace WpfApp1.ViewModel
             CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment);
             LoginCommand = new RelayCommand(NavigateToLogin);
             ManageUsersCommand = new RelayCommand(NavigateToManageUsers); // Comando para gestionar usuarios
+            ManageEventsCommand =new RelayCommand(NavigateToManageEvents);
             // Vista inicial
             CurrentView = new CreateUserVM(); // Carga directamente el UserControl
                                                                                                   

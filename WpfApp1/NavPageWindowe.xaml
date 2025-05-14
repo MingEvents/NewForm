@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="NavPageWindowe" Height="900" Width="1601"
+        Title="NavPageWindowe" Height="900" Width="1700"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -89,7 +89,7 @@
                                     </Grid.RowDefinitions>
                                     <Image Source="/establismentFavicon.png"
                              Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
-                                    <TextBlock Text="Crear Establecimiento"
+                                    <TextBlock Text="Crear Evento"
                                  Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
                                 </Grid>
                     </Menu:Btn>
@@ -106,6 +106,22 @@
                                         <TextBlock Text="Manejar Usuarios"
                              Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
                                     </Grid> 
+                    </Menu:Btn>
+                    
+                    <!-- Manage Events-->
+                    <!-- Manage Users-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                        Command="{Binding ManageEventsCommand}" Checked="Btn_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="61*"/>
+                                <RowDefinition Height="39*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/establismentFavicon.png"
+                                 Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
+                            <TextBlock Text="Manejar Eventos"
+                                Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
+                        </Grid>
                     </Menu:Btn>
                 </StackPanel>
             </Grid>

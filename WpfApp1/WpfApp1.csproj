@@ -105,6 +105,7 @@
     <Compile Include="ViewModel\CreateEventVM.cs" />
     <Compile Include="ViewModel\CreateEstablishmentVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
+    <Compile Include="ViewModel\ManageEventsVM.cs" />
     <Compile Include="ViewModel\ManageUsersVM.cs" />
     <Compile Include="ViewModel\NavigationVM.cs" />
     <Compile Include="ViewModel\CreateUserVM.cs" />
@@ -123,6 +124,9 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEvents.xaml.cs">
+      <DependentUpon>ManageEvents.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageUsers.xaml.cs">
       <DependentUpon>ManageUsers.xaml</DependentUpon>
@@ -168,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

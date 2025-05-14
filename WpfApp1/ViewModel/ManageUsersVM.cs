@@ -5,6 +5,7 @@ using WpfApp1.Utilities;
 using WpfApp1.Model;
 using System.Windows;
 using System;
+using WpfApp1.Models;
 
 namespace WpfApp1.ViewModel
 {
@@ -14,7 +15,6 @@ namespace WpfApp1.ViewModel
         private string _name;
         private string _email;
         private string _phone;
-        private int? _roleId;
         #region Propiedades
 
         public ObservableCollection<Users> UsersList { get; set; }
@@ -24,10 +24,10 @@ namespace WpfApp1.ViewModel
             get => _selectedUser;
             set
             {
-                Name = _selectedUser.name;
+                _selectedUser = new Users();
+                Name = _selectedUser.name; // ← ERROR AQUÍ
                 Email = _selectedUser.email;
-                Phone = _selectedUser.phone.ToString(); 
-                RoleId = _selectedUser.role_id; 
+                Phone = _selectedUser.phone.ToString();
                 _selectedUser = value;
                 OnPropertyChanged();
             }
@@ -50,17 +50,14 @@ namespace WpfApp1.ViewModel
             set { _phone = value; OnPropertyChanged(); }
         }
 
-        public int? RoleId
-        {
-            get => _roleId;
-            set { _roleId = value; OnPropertyChanged(); }
-        }
 
         #endregion
 
         #region Comandos
 
         public ICommand DeleteUserCommand { get; }
+        public ICommand UpdateUserCommand { get; }
+
 
         #endregion
 
@@ -69,7 +66,7 @@ namespace WpfApp1.ViewModel
         public ManageUsersVM()
         {
             LoadUsers();
-
+            UpdateUserCommand = new RelayCommand(ExecuteUpdateUser);
             // Inicializar comandos
             DeleteUserCommand = new RelayCommand(ExecuteDeleteUser);
         }
@@ -92,7 +89,20 @@ namespace WpfApp1.ViewModel
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void ExecuteUpdateUser(object obj)
+        {
+            if (SelectedUser == null) return;
 
+            try
+            {
+               var result  = UsersOrm.UpdateUser(SelectedUser);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error al actualizar",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void ExecuteDeleteUser(object obj)
         {
             if (SelectedUser == null)

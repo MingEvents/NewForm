@@ -20,5 +20,7 @@
     <DataTemplate DataType="{x:Type vm:ManageUsersVM}">
         <view:ManageUsers />
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type vm:ManageEventsVM}">
+        <view:ManageEvents />
+    </DataTemplate>
 </ResourceDictionary>

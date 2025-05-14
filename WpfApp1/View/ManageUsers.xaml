@@ -23,33 +23,90 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="700px"/>
+                        <ColumnDefinition Width="700"/>
                         <ColumnDefinition Width="*"/>
-
                     </Grid.ColumnDefinitions>
 
                     <!-- Título -->
-                    <TextBlock Text="Gestionar Usuarios" FontSize="28" FontWeight="Bold" Foreground="#1E3A5F" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Grid.ColumnSpan="2" 
+                               Text="Gestionar Usuarios" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="#1E3A5F" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,20"/>
 
                     <!-- Lista de usuarios -->
-                    <ListBox Grid.Row="1"                             
+                    <ListBox Grid.Row="1" 
+                             Grid.Column="0"
                              ItemsSource="{Binding UsersList}"
                              SelectedItem="{Binding SelectedUser}"
                              DisplayMemberPath="name"
                              BorderBrush="#CCC"
                              BorderThickness="1"
                              Background="#FFA3BCF9"
-                             Foreground="Black"                            
+                             Foreground="Black"
                              Margin="20"
                              FontSize="16"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="ListBox_SelectionChanged">
-                    </ListBox>
-                    
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                    <!-- Panel de edición -->
+                    <StackPanel Grid.Row="1" 
+                                Grid.Column="1"
+                                Margin="10,20,20,0"
+                                Background="#576490"
+
+                                DataContext="{Binding SelectedUser}">
+
+                        <TextBlock Text="Detalles del Usuario" 
+                                   FontSize="20" 
+                                   FontWeight="Bold" 
+                                   Foreground="#1E3A5F" 
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Campo Nombre -->
+                        <TextBlock Text="Nombre:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Campo Email -->
+                        <TextBlock Text="Email:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding email, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Campo Teléfono -->
+                        <TextBlock Text="Teléfono:" FontWeight="Bold" Foreground="White"/>
+                        <TextBox Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="0,0,0,20"/>
+
+                        <!-- Botón Actualizar -->
+                        <Button Content="Actualizar Usuario"
+                                Command="{Binding DataContext.UpdateUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Background="#1E90FF"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                Height="40"
+                                Width="200"
+                                HorizontalAlignment="Center"
+                                Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="10">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+
                     <!-- Botón Eliminar -->
                     <Button Grid.Row="2"
+                            Grid.Column="0"
                             Content="Eliminar Usuario"
                             Command="{Binding DeleteUserCommand}"
-                            Background="#D94448"
+                            Background="#1E90FF"
                             Foreground="White"
                             FontWeight="Bold"
                             Height="40"
