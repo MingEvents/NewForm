@@ -91,7 +91,7 @@ namespace WpfApp1.Model.Managment
             catch (Exception ex)
             {
                 string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
+                throw new Exception("Este establecimiento tiene eventos enlazados");
             }
         }
         public static List<string> selectAllCities()

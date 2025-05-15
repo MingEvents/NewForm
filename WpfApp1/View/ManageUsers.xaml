@@ -13,10 +13,9 @@
     </UserControl.DataContext>
 
     <Grid Background="#576490">
-        <!-- Contenedor principal -->
         <Border CornerRadius="20" Background="#576490" Padding="30" Width="1180" Height="880" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <Grid>
+                <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -27,102 +26,105 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Título -->
                     <TextBlock Grid.ColumnSpan="2" 
                                Text="Gestionar Usuarios" 
                                FontSize="28" 
                                FontWeight="Bold" 
-                               Foreground="#1E3A5F" 
+                               Foreground="White" 
                                HorizontalAlignment="Center" 
                                Margin="0,0,0,20"/>
 
-                    <!-- Lista de usuarios -->
                     <ListBox Grid.Row="1" 
                              Grid.Column="0"
                              ItemsSource="{Binding UsersList}"
                              SelectedItem="{Binding SelectedUser}"
-                             DisplayMemberPath="name"
                              BorderBrush="#CCC"
                              BorderThickness="1"
-                             Background="#FFA3BCF9"
+                             Background="Transparent"
                              Foreground="Black"
-                             Margin="20"
                              FontSize="16"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton Content="{Binding name}"
+                                             IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected, Mode=TwoWay}"
+                                             Style="{StaticResource BtnStyleList}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
 
-                    <!-- Panel de edición -->
                     <StackPanel Grid.Row="1" 
                                 Grid.Column="1"
                                 Margin="10,20,20,0"
                                 Background="#576490"
-
                                 DataContext="{Binding SelectedUser}">
 
                         <TextBlock Text="Detalles del Usuario" 
                                    FontSize="20" 
                                    FontWeight="Bold" 
-                                   Foreground="#1E3A5F" 
+                                   Foreground="White" 
                                    Margin="0,0,0,10"/>
 
-                        <!-- Campo Nombre -->
                         <TextBlock Text="Nombre:" FontWeight="Bold" Foreground="White"/>
                         <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
-                        <!-- Campo Email -->
                         <TextBlock Text="Email:" FontWeight="Bold" Foreground="White"/>
                         <TextBox Text="{Binding email, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
-                        <!-- Campo Teléfono -->
                         <TextBlock Text="Teléfono:" FontWeight="Bold" Foreground="White"/>
                         <TextBox Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
-                        <!-- Botón Actualizar -->
-                        <Button Content="Actualizar Usuario"
-                                Command="{Binding DataContext.UpdateUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                Background="#1E90FF"
-                                Foreground="White"
-                                FontWeight="Bold"
-                                Height="40"
-                                Width="200"
-                                HorizontalAlignment="Center"
-                                Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="10">
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Actualizar Usuario"
+                                    Command="{Binding DataContext.UpdateUserCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    Background="#1E90FF"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Margin="0,0,20,0"
+                                    Height="40"
+                                    Width="160"
+                                    HorizontalAlignment="Center"
+                                    Cursor="Hand">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="10">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <Button Content="Eliminar Usuario"
+                                    Command="{Binding DeleteUserCommand}" Background="#D94448"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Height="40"
+                                    Width="160"
+                                    HorizontalAlignment="Center"
+                                    Cursor="Hand">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="10">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
 
-                    <!-- Botón Eliminar -->
-                    <Button Grid.Row="2"
-                            Grid.Column="0"
-                            Content="Eliminar Usuario"
-                            Command="{Binding DeleteUserCommand}"
-                            Background="#1E90FF"
-                            Foreground="White"
-                            FontWeight="Bold"
-                            Height="40"
-                            Width="200"
-                            HorizontalAlignment="Center"
-                            Cursor="Hand">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                        CornerRadius="10">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
                 </Grid>
             </ScrollViewer>
         </Border>

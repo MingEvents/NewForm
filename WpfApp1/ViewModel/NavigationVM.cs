@@ -26,9 +26,14 @@ namespace WpfApp1.ViewModel
         public ICommand CreateEstablishmentCommand { get; set; }
         public ICommand ManageUsersCommand { get; set; } // Comando para gestionar usuarios
         public ICommand ManageEventsCommand { get; set; }
+        public ICommand ManageEstablishmentsCommand { get; set; } // Comando para gestionar establecimientos
 
 
         // Métodos para cambiar la vista
+        private void NavigateToManageEstablishments(object obj)
+        {
+            CurrentView = new ManageEstablishmentsVM(); // Cambia a la vista de gestión de establecimientos
+        }
         private void NavigateToCreateUser(object obj)
         {
             CurrentView = new CreateUserVM(); 
@@ -63,6 +68,7 @@ namespace WpfApp1.ViewModel
             LoginCommand = new RelayCommand(NavigateToLogin);
             ManageUsersCommand = new RelayCommand(NavigateToManageUsers); // Comando para gestionar usuarios
             ManageEventsCommand =new RelayCommand(NavigateToManageEvents);
+            ManageEstablishmentsCommand = new RelayCommand(NavigateToManageEstablishments); // Comando para gestionar establecimientos
             // Vista inicial
             CurrentView = new CreateUserVM(); // Carga directamente el UserControl
                                                                                                   
