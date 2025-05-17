@@ -9,7 +9,7 @@
              d:DesignWidth="1200">
 
     <UserControl.DataContext>
-        <vm:ManageUsersVM />
+        <vm:ManageEventsVM />
     </UserControl.DataContext>
 
     <Grid Background="#576490">
