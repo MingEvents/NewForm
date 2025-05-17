@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="Styles/TextBox.xaml" />
+                <ResourceDictionary Source="Styles/ButtonList.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Registro del convertidor StringToVisibilityConverter -->
