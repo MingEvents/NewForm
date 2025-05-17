@@ -6,8 +6,13 @@ namespace WpfApp1.Utilities
     public static class PasswordHelper
     {
         public static readonly DependencyProperty BindablePasswordProperty =
-            DependencyProperty.RegisterAttached("BindablePassword", typeof(string), typeof(PasswordHelper),
-                new FrameworkPropertyMetadata(string.Empty, OnBindablePasswordChanged));
+            DependencyProperty.RegisterAttached(
+                "BindablePassword",
+                typeof(string),
+                typeof(PasswordHelper),
+                new PropertyMetadata(string.Empty, OnBindablePasswordChanged));
+
+        private static bool _isUpdating = false;
 
         public static string GetBindablePassword(DependencyObject obj)
         {
@@ -21,31 +26,25 @@ namespace WpfApp1.Utilities
 
         private static void OnBindablePasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is PasswordBox passwordBox)
+            if (_isUpdating)
+                return;
+
+            var passwordBox = d as PasswordBox;
+            if (passwordBox != null)
             {
-                // Evitar bucles innecesarios al comparar el valor actual
-                string newPassword = e.NewValue as string;
-                if (passwordBox.Password != newPassword)
-                {
-                    passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
-                    passwordBox.Password = newPassword;
-                    passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
-                }
+                passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+                if (passwordBox.Password != (string)e.NewValue)
+                    passwordBox.Password = (string)e.NewValue;
+                passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
             }
         }
 
         private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (sender is PasswordBox passwordBox)
-            {
-                // Evitar bucles innecesarios al comparar el valor actual
-                string currentPassword = GetBindablePassword(passwordBox);
-                if (passwordBox.Password != currentPassword)
-                {
-                    SetBindablePassword(passwordBox, passwordBox.Password);
-                }
-            }
+            _isUpdating = true;
+            var passwordBox = sender as PasswordBox;
+            SetBindablePassword(passwordBox, passwordBox.Password);
+            _isUpdating = false;
         }
-
     }
 }

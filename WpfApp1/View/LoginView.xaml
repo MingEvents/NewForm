@@ -7,7 +7,7 @@
              xmlns:utils="clr-namespace:WpfApp1.Utilities"
              mc:Ignorable="d"
              d:DesignHeight="900" d:DesignWidth="1200">
-
+    
     <!-- Asignamos el ViewModel -->
     <UserControl.DataContext>
         <vm:LoginVM />
@@ -70,6 +70,12 @@
 
         <!-- Convertidor para mostrar/ocultar el hint -->
         <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+
+        <!-- Definimos el recurso 'LoginButtonGradient' para evitar el error -->
+        <LinearGradientBrush x:Key="LoginButtonGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FF4F8EF7" Offset="0"/>
+            <GradientStop Color="#FFD94448" Offset="1"/>
+        </LinearGradientBrush>
     </UserControl.Resources>
 
     <Grid Background="#576490">
@@ -132,32 +138,65 @@
                         <TextBlock Text="Password" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0" />
                         <PasswordBox x:Name="txtPassword"
                         Width="600"
-                        utils:PasswordHelper.BindablePassword="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                         Tag="Enter Password"
+                        utils:PasswordHelper.BindablePassword="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource UnderlinedPasswordBox}" />
                     </StackPanel>
 
                     <!-- Botón Login -->
                     <Button Width="400" Height="70"
-                            BorderThickness="2"
-                            BorderBrush="#D94448"
-                            Background="#D94448"
-                            Foreground="White"
-                            ToolTip="Login"
-                            Content="Login"
-                            FontSize="24"
-                            Margin="0 20"
-                            Command="{Binding LoginCommand}" />
+                        BorderThickness="0"
+                        Background="{StaticResource LoginButtonGradient}"
+                        Foreground="White"
+                        ToolTip="Login"
+                        Content="Login"
+                        FontSize="24"
+                        Margin="0 20"
+                        Command="{Binding LoginCommand}">
+                        <Button.Resources>
+                            <LinearGradientBrush x:Key="LoginButtonGradient" StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FF4F8EF7" Offset="0"/>
+                                <GradientStop Color="#FFD94448" Offset="1"/>
+                            </LinearGradientBrush>
+                            <DropShadowEffect x:Key="LoginButtonShadow" BlurRadius="10" ShadowDepth="2" Color="#80000000"/>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="{StaticResource LoginButtonGradient}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="24"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Effect" Value="{StaticResource LoginButtonShadow}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                CornerRadius="18"
+                                SnapsToDevicePixels="True"
+                                Effect="{TemplateBinding Effect}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFD94448"/>
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#B04F8EF7"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#FFB02A37"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
 
                     <!-- Botón Registro -->
-                    <Button Width="400" Height="50"
-                            FontSize="18"
-                            BorderThickness="0"
-                            Background="Transparent"
-                            Foreground="White"
-                            ToolTip="Register"
-                            x:Name="btnRegister"
-                            Content="Don't have an account?" />
+
                 </StackPanel>
             </StackPanel>
         </DockPanel>

@@ -98,7 +98,7 @@ namespace WpfApp1.ViewModel
         {
             int roleId;
 
-            roleId = UsersOrm.SlectRoleId(SelectedRole);
+            roleId = UsersOrm.SelectRoleId(SelectedRole);
 
 
             try

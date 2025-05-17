@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
 
 namespace WpfApp1.ViewModel
@@ -27,8 +28,13 @@ namespace WpfApp1.ViewModel
         public ICommand ManageUsersCommand { get; set; } // Comando para gestionar usuarios
         public ICommand ManageEventsCommand { get; set; }
 
+        public ICommand ManageEstablishmentsCommand { get; set; } // Comando para gestionar establecimientos
 
         // Métodos para cambiar la vista
+        private void NavigateToManageEstablishments(object obj)
+        {
+            CurrentView = new ManageEstablishmentsVM(); // Cambia a la vista de gestión de establecimientos
+        }
         private void NavigateToCreateUser(object obj)
         {
             CurrentView = new CreateUserVM(); 
@@ -56,21 +62,32 @@ namespace WpfApp1.ViewModel
         // Constructor
         public NavigationVM()
         {
-            // Inicializa los comandos con sus respectivos métodos
-            CreateUserCommand = new RelayCommand(NavigateToCreateUser);
+            // Inicializa los comandos con sus respectivos métodos y control de roles
+            CreateUserCommand = new RelayCommand(NavigateToCreateUser, CanNavigate);
             CreateEventCommand = new RelayCommand(NavigateToCreateEvent, CanNavigate);
-            CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment);
-            LoginCommand = new RelayCommand(NavigateToLogin);
-            ManageUsersCommand = new RelayCommand(NavigateToManageUsers); // Comando para gestionar usuarios
-            ManageEventsCommand =new RelayCommand(NavigateToManageEvents);
+            CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment, CanNavigate);
+            LoginCommand = new RelayCommand(NavigateToLogin); // El login no usa CanNavigate
+            ManageUsersCommand = new RelayCommand(NavigateToManageUsers, CanNavigate);
+            ManageEventsCommand = new RelayCommand(NavigateToManageEvents, CanNavigate);
+            ManageEstablishmentsCommand = new RelayCommand(NavigateToManageEstablishments, CanNavigate);
+
             // Vista inicial
-            CurrentView = new CreateUserVM(); // Carga directamente el UserControl
-                                                                                                  
+            CurrentView = new LoginVM();
         }
+
         private bool CanNavigate(object obj)
         {
-            // Lógica para habilitar o deshabilitar el comando
-            return true; // Siempre habilitado en este caso
+            // Si el usuario no ha iniciado sesión, no permite navegar (excepto login)
+            if (ViewModelBase.userLoged == null)
+                return false;
+
+            string role = UsersOrm.SelectRoleName(ViewModelBase.userLoged.role_id);
+            if (role == "superAdmin")
+                return true;
+            else if (role == "admin" || role == "user")
+                return false;
+
+            return false;
         }
 
     }

@@ -61,6 +61,7 @@ namespace WpfApp1.ViewModel
 
                 if (user != null)
                 {
+                    ViewModelBase.userLoged = user; // Guardar el usuario actual en la propiedad estática
                     // Inicio de sesión exitoso
                     MessageBox.Show("¡Inicio de sesión exitoso!", "Éxito",
                         MessageBoxButton.OK, MessageBoxImage.Information);

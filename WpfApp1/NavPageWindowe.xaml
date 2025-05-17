@@ -40,7 +40,7 @@
                 <Border Background="#FF071D2B"
                         CornerRadius="20,0,0,20" />
 
-                <StackPanel Height="600"
+                <StackPanel Height="900"
                             Width="456">
 
                     <!-- Login -->
@@ -109,7 +109,6 @@
                     </Menu:Btn>
                     
                     <!-- Manage Events-->
-                    <!-- Manage Users-->
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                         Command="{Binding ManageEventsCommand}" Checked="Btn_Checked">
                         <Grid>
@@ -121,6 +120,21 @@
                                  Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
                             <TextBlock Text="Manejar Eventos"
                                 Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
+                        </Grid>
+                    </Menu:Btn>
+
+                    <!-- Manage Establishments-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                         Command="{Binding ManageEstablishmentsCommand}" Checked="Btn_Checked">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="61*"/>
+                                <RowDefinition Height="39*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/establismentFavicon.png"
+                                Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
+                            <TextBlock Text="Manejar Eventos"
+                                 Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
                         </Grid>
                     </Menu:Btn>
                 </StackPanel>
