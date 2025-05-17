@@ -23,4 +23,7 @@
     <DataTemplate DataType="{x:Type vm:ManageEventsVM}">
         <view:ManageEvents />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ManageEstablishmentsVM}">
+        <view:ManageEstablishments />
+    </DataTemplate>
 </ResourceDictionary>
