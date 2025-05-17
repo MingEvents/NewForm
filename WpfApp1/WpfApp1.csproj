@@ -105,6 +105,7 @@
     <Compile Include="ViewModel\CreateEventVM.cs" />
     <Compile Include="ViewModel\CreateEstablishmentVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
+    <Compile Include="ViewModel\ManageEstablishmentsVM.cs" />
     <Compile Include="ViewModel\ManageEventsVM.cs" />
     <Compile Include="ViewModel\ManageUsersVM.cs" />
     <Compile Include="ViewModel\NavigationVM.cs" />

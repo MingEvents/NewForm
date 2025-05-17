@@ -32,7 +32,7 @@
                                Text="Gestionar Eventos" 
                                FontSize="28" 
                                FontWeight="Bold" 
-                               Foreground="#1E3A5F" 
+                               Foreground="White" 
                                HorizontalAlignment="Center" 
                                Margin="0,0,0,20"/>
 
@@ -41,15 +41,27 @@
                              Grid.Column="0"
                              ItemsSource="{Binding EventsList}"
                              SelectedItem="{Binding SelectedEvent}"
-                             DisplayMemberPath="name"
                              BorderBrush="#CCC"
                              BorderThickness="1"
                              Background="Transparent"
                              Foreground="Black"
                              Margin="20"
                              FontSize="16"
-                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton Content="{Binding name}"
+                                             IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected, Mode=TwoWay}"
+                                             Style="{StaticResource BtnStyleList}" />
 
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
                     <!-- Panel de edición -->
                     <StackPanel Grid.Row="1" 
                                 Grid.Column="1"
@@ -58,7 +70,7 @@
                         <TextBlock Text="Detalles del Evento" 
                                    FontSize="20" 
                                    FontWeight="Bold" 
-                                   Foreground="#1E3A5F" 
+                                   Foreground="White" 
                                    Margin="0,0,0,10"/>
 
                         <!-- Campo Nombre -->
