@@ -6,6 +6,7 @@ using WpfApp1.Model;
 using System.Windows;
 using System;
 using WpfApp1.Models;
+using System.Collections.Generic;
 
 namespace WpfApp1.ViewModel
 {
@@ -21,6 +22,8 @@ namespace WpfApp1.ViewModel
         private bool _seating;
         private string _description;
         private int _establishId;
+        private List<Establishment> _allEstablishments;
+        private Establishment _selectedEstablishment;
 
         #region Propiedades
 
@@ -42,6 +45,7 @@ namespace WpfApp1.ViewModel
                     EndDate = string.Empty;
                     Description = string.Empty;
                     EstablishId = 0;
+                    SelectedEstablishment = null;
                     _selectedEvent = null;
                 }
                 else
@@ -56,6 +60,7 @@ namespace WpfApp1.ViewModel
                     Seating = _selectedEvent.seating;
                     Description = _selectedEvent.descripcion;
                     EstablishId = _selectedEvent.establish_id;
+                    SelectedEstablishment = AllEstablishments?.Find(e => e.establish_id == _selectedEvent.establish_id);
                 }
 
                 OnPropertyChanged();
@@ -68,6 +73,7 @@ namespace WpfApp1.ViewModel
                 OnPropertyChanged(nameof(Seating));
                 OnPropertyChanged(nameof(Description));
                 OnPropertyChanged(nameof(EstablishId));
+                OnPropertyChanged(nameof(SelectedEstablishment));
             }
         }
 
@@ -125,6 +131,24 @@ namespace WpfApp1.ViewModel
             set { _establishId = value; OnPropertyChanged(); }
         }
 
+        public List<Establishment> AllEstablishments
+        {
+            get => _allEstablishments;
+            set { _allEstablishments = value; OnPropertyChanged(); }
+        }
+
+        public Establishment SelectedEstablishment
+        {
+            get => _selectedEstablishment;
+            set
+            {
+                _selectedEstablishment = value;
+                if (_selectedEstablishment != null)
+                    EstablishId = _selectedEstablishment.establish_id;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Comandos
@@ -138,6 +162,7 @@ namespace WpfApp1.ViewModel
 
         public ManageEventsVM()
         {
+            LoadEstablishments();
             LoadEvents();
 
             DeleteEventCommand = new RelayCommand(ExecuteDeleteEvent);
@@ -159,6 +184,19 @@ namespace WpfApp1.ViewModel
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("Error al cargar eventos: " + ex.Message, "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LoadEstablishments()
+        {
+            try
+            {
+                AllEstablishments = EstablishmentOrm.SelectAllEstablishments();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Error al cargar establecimientos: " + ex.Message, "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -217,7 +255,7 @@ namespace WpfApp1.ViewModel
                     eventToUpdate.end_date = this.EndDate;
                     eventToUpdate.seating = this.Seating;
                     eventToUpdate.descripcion = this.Description;
-                    eventToUpdate.establish_id = this.EstablishId;
+                    eventToUpdate.establish_id = this.SelectedEstablishment?.establish_id ?? 0;
 
                     Orm.db.SaveChanges();
 

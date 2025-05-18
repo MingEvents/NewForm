@@ -164,5 +164,19 @@ namespace WpfApp1.Model.Managment
             }
             return roleName;
         }
+        public static List<Reserve_Ticket> SelectTicket(int userId)
+        {
+            List<Reserve_Ticket> tickets = new List<Reserve_Ticket>();
+            try
+            {
+                tickets = Orm.db.Reserve_Ticket.Where(r => r.user_id == userId).ToList();
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            return tickets;
+        }
     }
 }

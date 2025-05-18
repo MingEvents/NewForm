@@ -52,7 +52,7 @@
                     </StackPanel>
                     <!-- Lista de ciudades -->
                     <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
-                        <TextBlock Text="Rol" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBlock Text="Ciudades" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
                         <ComboBox ItemsSource="{Binding City}" 
                         SelectedItem="{Binding SelectedCity, Mode=TwoWay}" 
                         FontSize="14" 

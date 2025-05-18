@@ -103,10 +103,20 @@
                         <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
                                  Margin="0,0,0,20"/>
 
-                        <!-- ID Establecimiento -->
-                        <TextBlock Text="ID de Establecimiento:" FontWeight="Bold" Foreground="White"/>
-                        <TextBox Text="{Binding EstablishId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
-                                 Margin="0,0,0,20"/>
+                        <!-- Nombre del Establecimiento -->
+                        <TextBlock Text="Establecimiento:" FontWeight="Bold" Foreground="White"/>
+                        <ComboBox ItemsSource="{Binding AllEstablishments}"
+                                  SelectedItem="{Binding SelectedEstablishment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="name"
+                                  SelectedValuePath="establish_id"
+                                  Margin="0,0,0,20"
+                                  FontSize="14"
+                                  BorderBrush="#4F8EF7"
+                                  BorderThickness="1"
+                                  Background="LightGray"
+                                  Height="35"
+                                  Padding="10"
+                                  Foreground="Black"/>
 
                         <!-- Tiene asientos -->
                         <TextBlock Text="¿Tiene asientos?" FontWeight="Bold" Foreground="White"/>

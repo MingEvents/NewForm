@@ -87,10 +87,20 @@
                         <TextBox Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
                                  Margin="0,0,0,20"/>
 
-                        <!-- Campo Ciudad ID -->
-                        <TextBlock Text="ID de Ciudad:" FontWeight="Bold" Foreground="White"/>
-                        <TextBox Text="{Binding CityId, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}"
-                                 Margin="0,0,0,20"/>
+                        <!-- Nombre de la Ciudad -->
+                        <TextBlock Text="Ciudad:" FontWeight="Bold" Foreground="White"/>
+                        <ComboBox ItemsSource="{Binding AllCities}"
+                                  SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="name"
+                                  SelectedValuePath="city_id"
+                                  Margin="0,0,0,20"
+                                  FontSize="14"
+                                  BorderBrush="#4F8EF7"
+                                  BorderThickness="1"
+                                  Background="LightGray"
+                                  Height="35"
+                                  Padding="10"
+                                  Foreground="Black"/>
 
                         <!-- Botones de acción -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

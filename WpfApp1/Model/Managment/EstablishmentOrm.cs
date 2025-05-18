@@ -115,6 +115,22 @@ namespace WpfApp1.Model.Managment
             return citiesName;
 
         }
+        public static List<City> getAllCities()
+        {
+            List<City> cities = new List<City>();
+            try
+            {
+                cities = Orm.db.City.ToList();
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+
+            return cities;
+
+        }
         public static int SlectCityId(string cityName)
         {
             int cityId = 0;

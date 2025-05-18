@@ -20,6 +20,8 @@ namespace WpfApp1.ViewModel
         private string _direction;
         private int _capacity;
         private int _cityId;
+        private List<City> _allCities;
+        private City _selectedCity;
 
         #region Propiedades
 
@@ -36,6 +38,7 @@ namespace WpfApp1.ViewModel
                     Direction = string.Empty;
                     Capacity = 0;
                     CityId = 0;
+                    SelectedCity = null;
                     _selectedEstablishment = null;
                 }
                 else
@@ -45,6 +48,7 @@ namespace WpfApp1.ViewModel
                     Direction = _selectedEstablishment.direction;
                     Capacity = _selectedEstablishment.capacity;
                     CityId = _selectedEstablishment.city_id;
+                    SelectedCity = AllCities?.Find(c => c.city_id == _selectedEstablishment.city_id);
                 }
 
                 OnPropertyChanged();
@@ -52,6 +56,7 @@ namespace WpfApp1.ViewModel
                 OnPropertyChanged(nameof(Direction));
                 OnPropertyChanged(nameof(Capacity));
                 OnPropertyChanged(nameof(CityId));
+                OnPropertyChanged(nameof(SelectedCity));
             }
         }
 
@@ -79,6 +84,24 @@ namespace WpfApp1.ViewModel
             set { _cityId = value; OnPropertyChanged(); }
         }
 
+        public List<City> AllCities
+        {
+            get => _allCities;
+            set { _allCities = value; OnPropertyChanged(); }
+        }
+
+        public City SelectedCity
+        {
+            get => _selectedCity;
+            set
+            {
+                _selectedCity = value;
+                if (_selectedCity != null)
+                    CityId = _selectedCity.city_id;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Comandos
@@ -92,6 +115,7 @@ namespace WpfApp1.ViewModel
 
         public ManageEstablishmentsVM()
         {
+            LoadCities();
             LoadEstablishments();
 
             UpdateEstablishmentCommand = new RelayCommand(ExecuteUpdate);
@@ -117,6 +141,19 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        private void LoadCities()
+        {
+            try
+            {
+                AllCities = EstablishmentOrm.getAllCities();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Error al cargar ciudades: " + ex.Message, "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void ExecuteUpdate(object obj)
         {
             if (SelectedEstablishment == null)
@@ -135,7 +172,7 @@ namespace WpfApp1.ViewModel
                     establishmentToUpdate.name = this.Name;
                     establishmentToUpdate.direction = this.Direction;
                     establishmentToUpdate.capacity = this.Capacity;
-                    establishmentToUpdate.city_id = this.CityId;
+                    establishmentToUpdate.city_id = this.SelectedCity?.city_id ?? 0;
 
                     Orm.db.SaveChanges();
 

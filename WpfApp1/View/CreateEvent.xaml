@@ -51,22 +51,67 @@
                         <TextBox Text="{Binding ReservedPlaces, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
                     </StackPanel>
 
-                    <!-- Fecha de inicio -->
+                    <!-- Fecha de inicio con DatePicker estilizado -->
                     <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
                         <TextBlock Text="Fecha de Inicio" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                Width="536"
+                Height="36"
+                Background="#F0F4FF"
+                Foreground="#222"
+                BorderBrush="#4F8EF7"
+                BorderThickness="1"
+                FontSize="16"
+                Padding="8,0"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center">
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Background" Value="#F0F4FF"/>
+                                    <Setter Property="Foreground" Value="#222"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="6,2"/>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
                     </StackPanel>
 
-                    <!-- Fecha fin -->
+                    <!-- Fecha fin con DatePicker estilizado -->
                     <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
                         <TextBlock Text="Fecha de Fin" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
+                                Width="536"
+                                Height="36"
+                                Background="#F0F4FF"
+                                Foreground="#222"
+                                BorderBrush="#4F8EF7"
+                                BorderThickness="1"
+                                FontSize="16"
+                                Padding="8,0"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center">
+                            <DatePicker.Resources>  
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Background" Value="#F0F4FF"/>
+                                    <Setter Property="Foreground" Value="#222"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="6,2"/>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
                     </StackPanel>
 
                     <!-- Descripción -->
-                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
-                        <TextBlock Text="Descripción" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="10" Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Text="Descripción" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="400"/>
+                        </StackPanel>
+                        <Button Command="{Binding GenerateDescriptionIACommand}" Margin="10,25,0,0" Width="40" Height="40" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                            <Image Source="/Images/IaDescription.png" Stretch="Uniform"/>
+                        </Button>
                     </StackPanel>
 
                     <!-- Seleccionar Establecimiento -->

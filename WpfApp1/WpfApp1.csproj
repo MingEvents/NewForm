@@ -69,6 +69,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -96,6 +99,9 @@
     <Compile Include="Model\Managment\EventOrm.cs" />
     <Compile Include="Model\Managment\Orm.cs" />
     <Compile Include="Model\Managment\UsersOrm.cs" />
+    <Compile Include="Model\Reserve_Ticket.cs">
+      <DependentUpon>MingsEventsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Btn.cs" />
     <Compile Include="Utilities\PasswordHelper.cs" />
     <Compile Include="Utilities\PasswordLogin.cs" />
@@ -285,6 +291,7 @@
     <Resource Include="establismentFavicon.png" />
     <Resource Include="Images\CreateUserFavicon.png" />
     <Resource Include="CreateUserFavicon.png" />
+    <Resource Include="Images\IaDescription.png" />
     <Content Include="Model\MingsEventsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MingsEventsModel.Context.cs</LastGenOutput>

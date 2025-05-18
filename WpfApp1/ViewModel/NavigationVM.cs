@@ -78,14 +78,19 @@ namespace WpfApp1.ViewModel
         private bool CanNavigate(object obj)
         {
             // Si el usuario no ha iniciado sesión, no permite navegar (excepto login)
-            if (ViewModelBase.userLoged == null)
+            if (ViewModelBase.userLoged == null) {
                 return false;
+            }
 
             string role = UsersOrm.SelectRoleName(ViewModelBase.userLoged.role_id);
             if (role == "superAdmin")
+            {
                 return true;
-            else if (role == "admin" || role == "user")
+            }
+            else if (obj is string createUserVM && role == "manager")
+            {
                 return false;
+            }
 
             return false;
         }
