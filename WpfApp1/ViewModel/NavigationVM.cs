@@ -9,7 +9,6 @@ namespace WpfApp1.ViewModel
     {
         private object _currentView;
 
-        // Propiedad para la vista actual
         public object CurrentView
         {
             get => _currentView;
@@ -20,27 +19,25 @@ namespace WpfApp1.ViewModel
             }
         }
 
-        // Comandos para la navegación
         public ICommand CreateUserCommand { get; set; }
         public ICommand CreateEventCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand CreateEstablishmentCommand { get; set; }
-        public ICommand ManageUsersCommand { get; set; } // Comando para gestionar usuarios
+        public ICommand ManageUsersCommand { get; set; }
         public ICommand ManageEventsCommand { get; set; }
+        public ICommand ManageEstablishmentsCommand { get; set; }
 
-        public ICommand ManageEstablishmentsCommand { get; set; } // Comando para gestionar establecimientos
-
-        // Métodos para cambiar la vista
         private void NavigateToManageEstablishments(object obj)
         {
-            CurrentView = new ManageEstablishmentsVM(); // Cambia a la vista de gestión de establecimientos
+            CurrentView = new ManageEstablishmentsVM();
         }
         private void NavigateToCreateUser(object obj)
         {
-            CurrentView = new CreateUserVM(); 
+            CurrentView = new CreateUserVM();
         }
-        private void NavigateToCreateEvent(object obj) { 
-            CurrentView = new CreateEventVM(); 
+        private void NavigateToCreateEvent(object obj)
+        {
+            CurrentView = new CreateEventVM();
         }
         private void NavigateToCreateEstablishment(object obj)
         {
@@ -57,50 +54,45 @@ namespace WpfApp1.ViewModel
         private void NavigateToManageUsers(object obj)
         {
             CurrentView = new ManageUsersVM();
-        }// Método para gestionar usuarios
+        }
 
-        // Constructor
         public NavigationVM()
         {
-            // Inicializa los comandos con sus respectivos métodos y control de roles
-            CreateUserCommand = new RelayCommand(NavigateToCreateUser, CanNavigate);
-            CreateEventCommand = new RelayCommand(NavigateToCreateEvent, CanNavigate);
-            CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment, CanNavigate);
-            LoginCommand = new RelayCommand(NavigateToLogin); // El login no usa CanNavigate
-            ManageUsersCommand = new RelayCommand(NavigateToManageUsers, CanNavigate);
-            ManageEventsCommand = new RelayCommand(NavigateToManageEvents, CanNavigate);
-            ManageEstablishmentsCommand = new RelayCommand(NavigateToManageEstablishments, CanNavigate);
+            CreateUserCommand = new RelayCommand(NavigateToCreateUser, (o) => CanNavigate("CreateUserVM"));
+            CreateEventCommand = new RelayCommand(NavigateToCreateEvent, (o) => CanNavigate("CreateEventVM"));
+            CreateEstablishmentCommand = new RelayCommand(NavigateToCreateEstablishment, (o) => CanNavigate("CreateEstablishmentVM"));
+            LoginCommand = new RelayCommand(NavigateToLogin);
+            ManageUsersCommand = new RelayCommand(NavigateToManageUsers, (o) => CanNavigate("ManageUsersVM"));
+            ManageEventsCommand = new RelayCommand(NavigateToManageEvents, (o) => CanNavigate("ManageEventsVM"));
+            ManageEstablishmentsCommand = new RelayCommand(NavigateToManageEstablishments, (o) => CanNavigate("ManageEstablishmentsVM"));
 
-            // Vista inicial
             CurrentView = new LoginVM();
         }
 
         private bool CanNavigate(object obj)
         {
-            // Si el usuario no ha iniciado sesión, no permite navegar (excepto login)
-            if (ViewModelBase.userLoged == null) {
+            if (ViewModelBase.userLoged == null)
+            {
                 return false;
             }
 
             string role = UsersOrm.SelectRoleName(ViewModelBase.userLoged.role_id);
+            string commandName = obj as string;
+
             if (role == "superAdmin")
             {
                 return true;
             }
-            else if (obj is string createUserVM && role == "manager")
+            else if (role == "manager")
             {
-                return false;
-            }
-            else if (obj is string createEventVM || obj is string manageEventsVM && role == "manager")
-            {
-                if (obj == null) return false; // Seguridad extra
-                var commandName = obj as string;
+                // El manager solo puede acceder a CreateEventVM y ManageEventsVM
                 if (commandName == "CreateEventVM" || commandName == "ManageEventsVM")
                     return true;
-
+                else
+                    return false;
             }
+            // Otros roles no tienen permisos
             return false;
         }
-
     }
 }
