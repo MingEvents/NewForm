@@ -156,7 +156,7 @@ namespace WpfApp1.ViewModel
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No se pudo eliminar el usuario.", "Error",
+                    System.Windows.MessageBox.Show("No se pudo eliminar el usuario, comrpueba que no tenga reservas hechas", "Error",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

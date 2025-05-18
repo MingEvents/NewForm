@@ -62,13 +62,13 @@ namespace WpfApp1.ViewModel
         public int NumRows
         {
             get => _numRows;
-            set { _numRows = value; OnPropertyChanged(); }
+            set { _numRows = value; OnPropertyChanged(); CalculateCapacity(); }
         }
 
         public int NumColumns
         {
             get => _numColumns;
-            set { _numColumns = value; OnPropertyChanged(); }
+            set { _numColumns = value; OnPropertyChanged(); CalculateCapacity(); }
         }
 
         #endregion
@@ -87,9 +87,18 @@ namespace WpfApp1.ViewModel
             LoadAllCities();
         }
 
+
         #endregion
 
         #region Métodos
+
+        private void CalculateCapacity()
+        {
+            if (NumRows !=null && NumColumns != null)
+            {
+                Capacity = (NumRows * NumColumns).ToString();
+            }
+        }
 
         private void ExecuteCreateEstablishment(object obj)
         {

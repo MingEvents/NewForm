@@ -64,10 +64,7 @@
                     <StackPanel Grid.Row="1" 
                                 Grid.Column="1"
                                 Margin="10,20,20,0"
-                                Background="#576490"
-
-                                DataContext="{Binding SelectedUser}">
-
+                                Background="#576490">
                         <TextBlock Text="Detalles del Usuario" 
                                    FontSize="20" 
                                    FontWeight="Bold" 
@@ -76,17 +73,17 @@
 
                         <!-- Campo Nombre -->
                         <TextBlock Text="Nombre:" FontWeight="Bold" Foreground="White"/>
-                        <TextBox Text="{Binding name, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
                         <!-- Campo Email -->
                         <TextBlock Text="Email:" FontWeight="Bold" Foreground="White"/>
-                        <TextBox Text="{Binding email, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
                         <!-- Campo Teléfono -->
                         <TextBlock Text="Teléfono:" FontWeight="Bold" Foreground="White"/>
-                        <TextBox Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
 
                         <!-- Lista de Tickets -->
@@ -96,7 +93,7 @@
                                     <Border BorderBrush="#4F8EF7" BorderThickness="1" CornerRadius="6" Margin="0,10,0,10" Padding="10" Background="#445">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Evento:" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
-                                            <TextBox Text="{Binding Event.name, Mode=OneWay}" IsReadOnly="True" Width="120" Margin="0,0,10,0"/>
+                                            <TextBox Text="{Binding Event.name, Mode=OneWay}" IsReadOnly="True" Width="70" Margin="0,0,10,0"/>
                                             <TextBlock Text="Fila:" Foreground="White" FontWeight="Bold" Margin="0,0,5,0"/>
                                             <TextBox Text="{Binding Armchair.rows, UpdateSourceTrigger=PropertyChanged}" Width="40" Margin="0,0,10,0"/>
                                             <TextBlock Text="Columna:" Foreground="White" FontWeight="Bold" Margin="0,0,5,0"/>
@@ -158,10 +155,7 @@
                                 </Button.Template>
                             </Button>
                         </StackPanel>
-                        </StackPanel>
-
-                        <!-- Botón Eliminar -->
-                    
+                    </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Border>

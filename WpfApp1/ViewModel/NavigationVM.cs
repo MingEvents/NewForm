@@ -91,7 +91,14 @@ namespace WpfApp1.ViewModel
             {
                 return false;
             }
+            else if (obj is string createEventVM || obj is string manageEventsVM && role == "manager")
+            {
+                if (obj == null) return false; // Seguridad extra
+                var commandName = obj as string;
+                if (commandName == "CreateEventVM" || commandName == "ManageEventsVM")
+                    return true;
 
+            }
             return false;
         }
 

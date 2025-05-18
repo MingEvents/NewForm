@@ -221,7 +221,7 @@ namespace WpfApp1.ViewModel
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No se pudo eliminar el evento.", "Error",
+                    System.Windows.MessageBox.Show("No se pudo eliminar el evento, comprueba que no tenga nínguna clave foránea asociada", "Error",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

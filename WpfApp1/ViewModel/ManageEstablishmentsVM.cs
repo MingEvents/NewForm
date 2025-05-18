@@ -207,7 +207,7 @@ namespace WpfApp1.ViewModel
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No se pudo eliminar el establecimiento.", "Error",
+                    System.Windows.MessageBox.Show("No se pudo eliminar el establecimiento, comprueba que no tenga eventos asociados", "Error",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
