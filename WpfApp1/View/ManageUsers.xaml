@@ -88,6 +88,35 @@
                         <TextBlock Text="Teléfono:" FontWeight="Bold" Foreground="White"/>
                         <TextBox Text="{Binding phone, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="0,0,0,20"/>
+
+                        <!-- Lista de Tickets -->
+                        <ItemsControl ItemsSource="{Binding UserTickets}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#4F8EF7" BorderThickness="1" CornerRadius="6" Margin="0,10,0,10" Padding="10" Background="#445">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Evento:" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
+                                            <TextBox Text="{Binding Event.name, Mode=OneWay}" IsReadOnly="True" Width="120" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Fila:" Foreground="White" FontWeight="Bold" Margin="0,0,5,0"/>
+                                            <TextBox Text="{Binding Armchair.rows, UpdateSourceTrigger=PropertyChanged}" Width="40" Margin="0,0,10,0"/>
+                                            <TextBlock Text="Columna:" Foreground="White" FontWeight="Bold" Margin="0,0,5,0"/>
+                                            <TextBox Text="{Binding Armchair.columns, UpdateSourceTrigger=PropertyChanged}" Width="40" Margin="0,0,10,0"/>
+                                            <Button Content="Actualizar"
+                                                    Command="{Binding DataContext.UpdateTicketCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}" 
+                                                    Background="#1E90FF"
+                                                    Foreground="White"
+                                                    FontWeight="Bold"
+                                                    Height="28"
+                                                    Width="90"
+                                                    Margin="10,0,0,0"
+                                                    Cursor="Hand"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <!-- Botón Actualizar -->
                             <Button Content="Actualizar Usuario"

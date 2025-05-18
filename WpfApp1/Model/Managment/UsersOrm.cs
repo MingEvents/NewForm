@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfApp1.Models;
-using WpfApp1.Model;
 
 namespace WpfApp1.Model.Managment
 {
@@ -177,6 +174,20 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
             return tickets;
+        }
+        public static Armchair SelectTicketArmchair(int ticketId)
+        {
+            Armchair armchair = new Armchair();
+            try
+            {
+                armchair = Orm.db.Armchair.FirstOrDefault(r => r.armchair_id == ticketId);
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            return armchair;
         }
     }
 }

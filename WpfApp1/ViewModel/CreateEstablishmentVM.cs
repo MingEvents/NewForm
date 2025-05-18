@@ -13,6 +13,9 @@ namespace WpfApp1.ViewModel
         private string _capacity;
         private List<string> _cities;
         private string _selectedCity;
+        private int _numRows;
+        private int _numColumns;
+
         #region Propiedades
 
         public string Name
@@ -55,6 +58,19 @@ namespace WpfApp1.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public int NumRows
+        {
+            get => _numRows;
+            set { _numRows = value; OnPropertyChanged(); }
+        }
+
+        public int NumColumns
+        {
+            get => _numColumns;
+            set { _numColumns = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         #region Comandos
@@ -87,8 +103,20 @@ namespace WpfApp1.ViewModel
                     capacity = int.Parse(this.Capacity),
                     city_id = cityId
                 };
-           
+
                 EstablishmentOrm.InsertEstablishment(newEstablishment);
+
+                // Obtener el ID del establecimiento recién creado
+                int establishId = newEstablishment.establish_id;
+                // Si el ID no se actualiza automáticamente, recupéralo de la base de datos:
+                if (establishId == 0)
+                {
+                    var last = EstablishmentOrm.GetEstablishmentById(newEstablishment.establish_id);
+                    if (last != null) establishId = last.establish_id;
+                }
+
+                // Insertar las butacas
+                EstablishmentOrm.InsertArmchairsForEstablishment(establishId, NumRows, NumColumns);
 
                 ClearFields();
             }
@@ -99,6 +127,7 @@ namespace WpfApp1.ViewModel
                     System.Windows.MessageBoxImage.Error);
             }
         }
+
         private List<string> LoadAllCities()
         {
             try

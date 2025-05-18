@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
@@ -9,12 +10,16 @@ using WpfApp1.Models;
 
 namespace WpfApp1.ViewModel
 {
+    
+
     public class ManageUsersVM : ViewModelBase
     {
         private Users _selectedUser;
         private string _name;
         private string _email;
         private string _phone;
+        private ObservableCollection<Reserve_Ticket> _userTickets;
+
         #region Propiedades
 
         public ObservableCollection<Users> UsersList { get; set; }
@@ -24,11 +29,21 @@ namespace WpfApp1.ViewModel
             get => _selectedUser;
             set
             {
-                _selectedUser = new Users();
-                Name = _selectedUser.name; // ← ERROR AQUÍ
-                Email = _selectedUser.email;
-                Phone = _selectedUser.phone.ToString();
                 _selectedUser = value;
+                if (_selectedUser != null)
+                {
+                    Name = _selectedUser.name;
+                    Email = _selectedUser.email;
+                    Phone = _selectedUser.phone.ToString();
+                    LoadUserTickets();
+                }
+                else
+                {
+                    Name = string.Empty;
+                    Email = string.Empty;
+                    Phone = string.Empty;
+                    UserTickets = new ObservableCollection<Reserve_Ticket>();
+                }
                 OnPropertyChanged();
             }
         }
@@ -50,6 +65,11 @@ namespace WpfApp1.ViewModel
             set { _phone = value; OnPropertyChanged(); }
         }
 
+        public ObservableCollection<Reserve_Ticket> UserTickets
+        {
+            get => _userTickets;
+            set { _userTickets = value; OnPropertyChanged(); }
+        }
 
         #endregion
 
@@ -57,7 +77,7 @@ namespace WpfApp1.ViewModel
 
         public ICommand DeleteUserCommand { get; }
         public ICommand UpdateUserCommand { get; }
-
+        public ICommand UpdateTicketCommand { get; }
 
         #endregion
 
@@ -67,8 +87,8 @@ namespace WpfApp1.ViewModel
         {
             LoadUsers();
             UpdateUserCommand = new RelayCommand(ExecuteUpdateUser);
-            // Inicializar comandos
             DeleteUserCommand = new RelayCommand(ExecuteDeleteUser);
+            UpdateTicketCommand = new RelayCommand(ExecuteUpdateTicket);
         }
 
         #endregion
@@ -89,13 +109,25 @@ namespace WpfApp1.ViewModel
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void LoadUserTickets()
+        {
+            if (SelectedUser == null)
+            {
+                UserTickets = new ObservableCollection<Reserve_Ticket>();
+                return;
+            }
+            var tickets = UsersOrm.SelectTicket(SelectedUser.user_id);
+            UserTickets = new ObservableCollection<Reserve_Ticket>(tickets);
+        }
+
         private void ExecuteUpdateUser(object obj)
         {
             if (SelectedUser == null) return;
 
             try
             {
-               var result  = UsersOrm.UpdateUser(SelectedUser);
+                var result = UsersOrm.UpdateUser(SelectedUser);
             }
             catch (Exception ex)
             {
@@ -103,6 +135,7 @@ namespace WpfApp1.ViewModel
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void ExecuteDeleteUser(object obj)
         {
             if (SelectedUser == null)
@@ -131,6 +164,20 @@ namespace WpfApp1.ViewModel
             {
                 System.Windows.MessageBox.Show(ex.Message, "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ExecuteUpdateTicket(object obj)
+        {
+            if (obj is Reserve_Ticket ticket)
+            {
+                var armchair = ticket.Armchair;
+                if (armchair != null)
+                {
+                    // Los valores de fila y columna se actualizan desde el binding
+                    Orm.db.SaveChanges();
+                    System.Windows.MessageBox.Show("Butaca actualizada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 

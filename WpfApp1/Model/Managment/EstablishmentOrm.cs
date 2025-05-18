@@ -94,6 +94,20 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+        public static Establishment GetEstablishmentById(int establishmentId)
+        {
+            Establishment establishment = null;
+            try
+            {
+                establishment = Orm.db.Establishment.FirstOrDefault(e => e.establish_id == establishmentId);
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+            return establishment;
+        }
         public static List<string> selectAllCities()
         {
             List<City> cities = new List<City>();
@@ -148,6 +162,32 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
             return cityId;
+        }
+        // Añade este método a la clase EstablishmentOrm
+        public static void InsertArmchairsForEstablishment(int establishId, int numRows, int numColumns)
+        {
+            try
+            {
+                for (int row = 1; row <= numRows; row++)
+                {
+                    for (int col = 1; col <= numColumns; col++)
+                    {
+                        var armchair = new Armchair
+                        {
+                            rows = row,
+                            columns = col,
+                            establish_id = establishId
+                        };
+                        Orm.db.Armchair.Add(armchair);
+                    }
+                }
+                Orm.db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
         }
     }
 }

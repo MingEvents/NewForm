@@ -63,6 +63,16 @@
                         Foreground="Black"/>        
                     </StackPanel>
 
+                    <!-- Añade los campos para filas y columnas en el formulario -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
+                        <TextBlock Text="Filas de asientos" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding NumRows, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
+                        <TextBlock Text="Columnas de asientos" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                        <TextBox Text="{Binding NumColumns, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
                     <!-- Botón Crear -->
                     <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Crear Establecimiento" 
                             Command="{Binding CreateEstablishmentCommand}" 
