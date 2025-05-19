@@ -19,6 +19,7 @@ namespace WpfApp1.ViewModel
         private string _email;
         private string _phone;
         private ObservableCollection<Reserve_Ticket> _userTickets;
+        private ObservableCollection<Event> _userEvents;
 
         #region Propiedades
 
@@ -70,6 +71,11 @@ namespace WpfApp1.ViewModel
             get => _userTickets;
             set { _userTickets = value; OnPropertyChanged(); }
         }
+        public ObservableCollection<Event> UserEvents
+        {
+            get => _userEvents;
+            set { _userEvents = value; OnPropertyChanged(); }
+        }
 
         #endregion
 
@@ -117,9 +123,26 @@ namespace WpfApp1.ViewModel
                 UserTickets = new ObservableCollection<Reserve_Ticket>();
                 return;
             }
-            var tickets = UsersOrm.SelectTicket(SelectedUser.user_id);
+            var tickets = Reserve_TicketOrm.SelectTicket(SelectedUser.user_id);
             UserTickets = new ObservableCollection<Reserve_Ticket>(tickets);
         }
+        /*
+        private void LoadUserEvents()
+        {
+
+            if (UserTickets == null)
+            {
+                foreach (var ticket in UserTickets)
+                {
+                    var eventDetails = EventOrm.GetEventById(ticket.event_id);
+                    if (eventDetails != null)
+                    {
+                        UserEvents.Add(eventDetails);
+                    }
+                }
+            }
+        }
+        */
 
         private void ExecuteUpdateUser(object obj)
         {

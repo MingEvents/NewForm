@@ -98,6 +98,8 @@
     <Compile Include="Model\Managment\EstablishmentOrm.cs" />
     <Compile Include="Model\Managment\EventOrm.cs" />
     <Compile Include="Model\Managment\Orm.cs" />
+    <Compile Include="Model\Managment\Reserve_TicketOrm.cs" />
+    <Compile Include="Model\Managment\RoleOrm.cs" />
     <Compile Include="Model\Managment\UsersOrm.cs" />
     <Compile Include="Model\Reserve_Ticket.cs">
       <DependentUpon>MingsEventsModel.tt</DependentUpon>
@@ -292,6 +294,10 @@
     <Resource Include="Images\CreateUserFavicon.png" />
     <Resource Include="CreateUserFavicon.png" />
     <Resource Include="Images\IaDescription.png" />
+    <Resource Include="Images\manejarEventosFavicon.png" />
+    <Resource Include="Images\manejarEstablecimientos.png" />
+    <Resource Include="Images\crearEstablecimiento.png" />
+    <Resource Include="Images\manejarUsuarios.png" />
     <Content Include="Model\MingsEventsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MingsEventsModel.Context.cs</LastGenOutput>

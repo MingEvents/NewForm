@@ -50,7 +50,6 @@ namespace WpfApp1.Model.Managment
                     existingUser.phone = user.phone;
                     existingUser.password = user.password;
                     existingUser.second_name = user.second_name;
-
                     existingUser.name = user.name;
                     existingUser.email = user.email;
                     // Actualiza otros campos según sea necesario
@@ -106,88 +105,10 @@ namespace WpfApp1.Model.Managment
             }
         }
 
-        public static List<string> SlectAllRoles()
-        {
-            List<Role> roles = new List<Role>();
-            List<string> rolesName = new List<string>();
-            try
-            {
-                roles = Orm.db.Role.ToList();
-            }
-            catch (Exception ex)
-            {
-                string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
-            }
-            foreach (Role role in roles)
-            {
-                rolesName.Add(role.name);
-            }
-            return rolesName;
-        }
-        public static int SelectRoleId(string roleName)
-        {
-            int roleId = 0;
-            try
-            {
-                var role = Orm.db.Role.FirstOrDefault(r => r.name == roleName);
-                if (role != null)
-                {
-                    roleId = role.role_id;
-                }
-            }
-            catch (Exception ex)
-            {
-                string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
-            }
-            return roleId;
-        }
-        public static string SelectRoleName(int roleId)
-        {
-            var roleName = "";
-            try
-            {
-                var role = Orm.db.Role.FirstOrDefault(r => r.role_id == roleId);
-                if (role != null)
-                {
-                    roleName = role.name;
-                }
-            }
-            catch (Exception ex)
-            {
-                string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
-            }
-            return roleName;
-        }
-        public static List<Reserve_Ticket> SelectTicket(int userId)
-        {
-            List<Reserve_Ticket> tickets = new List<Reserve_Ticket>();
-            try
-            {
-                tickets = Orm.db.Reserve_Ticket.Where(r => r.user_id == userId).ToList();
-            }
-            catch (Exception ex)
-            {
-                string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
-            }
-            return tickets;
-        }
-        public static Armchair SelectTicketArmchair(int ticketId)
-        {
-            Armchair armchair = new Armchair();
-            try
-            {
-                armchair = Orm.db.Armchair.FirstOrDefault(r => r.armchair_id == ticketId);
-            }
-            catch (Exception ex)
-            {
-                string message = Orm.ErrorMessage(ex);
-                throw new Exception(message);
-            }
-            return armchair;
-        }
+       
+        
+        
+       
+        
     }
 }

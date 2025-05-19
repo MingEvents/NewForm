@@ -73,7 +73,7 @@
                                 <RowDefinition Height="61*"/>
                                 <RowDefinition Height="39*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="/establismentFavicon.png"
+                            <Image Source="Images/crearEstablecimiento.png"
                                    Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
                             <TextBlock Text="Crear Establecimiento"
                                        Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
@@ -101,7 +101,7 @@
                                             <RowDefinition Height="61*"/>
                                             <RowDefinition Height="39*"/>
                                         </Grid.RowDefinitions>
-                                        <Image Source="/establismentFavicon.png"
+                                        <Image Source="Images/manejarUsuarios.png"
                          Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
                                         <TextBlock Text="Manejar Usuarios"
                              Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
@@ -116,7 +116,7 @@
                                 <RowDefinition Height="61*"/>
                                 <RowDefinition Height="39*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="/establismentFavicon.png"
+                            <Image Source="Images/manejarEventosFavicon.png"
                                  Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
                             <TextBlock Text="Manejar Eventos"
                                 Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
@@ -131,9 +131,9 @@
                                 <RowDefinition Height="61*"/>
                                 <RowDefinition Height="39*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="/establismentFavicon.png"
+                            <Image Source="Images/manejarEstablecimientos.png"
                                 Style="{StaticResource Image_Style}" Margin="28,23,0,0" VerticalAlignment="Top" Grid.RowSpan="2" />
-                            <TextBlock Text="Manejar Eventos"
+                            <TextBlock Text="Manejar Etablecimientos"
                                  Style="{StaticResource Text_Style}" Margin="121,39,0,0" VerticalAlignment="Top" />
                         </Grid>
                     </Menu:Btn>

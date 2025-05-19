@@ -43,7 +43,18 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
-
+        public static Event GetEventById(int eventId)
+        {
+            try
+            {
+                return Orm.db.Event.Find(eventId);
+            }
+            catch (Exception ex)
+            {
+                string message = Orm.ErrorMessage(ex);
+                throw new Exception(message);
+            }
+        }
         /// <summary>
         /// Actualiza un evento existente
         /// </summary>

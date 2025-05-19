@@ -76,7 +76,7 @@ namespace WpfApp1.ViewModel
                 return false;
             }
 
-            string role = UsersOrm.SelectRoleName(ViewModelBase.userLoged.role_id);
+            string role = RoleOrm.SelectRoleName(ViewModelBase.userLoged.role_id);
             string commandName = obj as string;
 
             if (role == "superAdmin")

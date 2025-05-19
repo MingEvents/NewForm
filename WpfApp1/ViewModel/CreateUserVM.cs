@@ -83,7 +83,7 @@ namespace WpfApp1.ViewModel
         {
             try
             {
-                Role = UsersOrm.SlectAllRoles();
+                Role = RoleOrm.SlectAllRoles();
                 OnPropertyChanged(nameof(Role));
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace WpfApp1.ViewModel
         {
             int roleId;
 
-            roleId = UsersOrm.SelectRoleId(SelectedRole);
+            roleId = RoleOrm.SelectRoleId(SelectedRole);
 
 
             try
