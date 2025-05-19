@@ -5,9 +5,15 @@ using WpfApp1.Models;
 
 namespace WpfApp1.Model.Managment
 {
+    /// <summary>
+    /// Clase ORM para operaciones relacionadas con usuarios.
+    /// </summary>
     public static class UsersOrm
     {
-        // Método para obtener todos los usuarios
+        /// <summary>
+        /// Obtiene una lista de todos los usuarios.
+        /// </summary>
+        /// <returns>Lista de objetos <see cref="Users"/>.</returns>
         public static List<Users> SlectAllUsers()
         {
             List<Users> users = new List<Users>();
@@ -23,7 +29,11 @@ namespace WpfApp1.Model.Managment
             return users;
         }
 
-        // Método para insertar un nuevo usuario
+        /// <summary>
+        /// Inserta un nuevo usuario en la base de datos.
+        /// </summary>
+        /// <param name="user">El usuario a insertar.</param>
+        /// <returns>True si la inserción fue exitosa, false en caso contrario.</returns>
         public static bool InsertUser(Users user)
         {
             try
@@ -39,7 +49,11 @@ namespace WpfApp1.Model.Managment
             }
         }
 
-        // Método para actualizar un usuario existente
+        /// <summary>
+        /// Actualiza un usuario existente.
+        /// </summary>
+        /// <param name="user">El usuario con los datos actualizados.</param>
+        /// <returns>True si la actualización fue exitosa, false si el usuario no existe.</returns>
         public static bool UpdateUser(Users user)
         {
             try
@@ -65,7 +79,11 @@ namespace WpfApp1.Model.Managment
             }
         }
 
-        // Método para eliminar un usuario
+        /// <summary>
+        /// Elimina un usuario por su ID.
+        /// </summary>
+        /// <param name="userId">ID del usuario a eliminar.</param>
+        /// <returns>True si se eliminó correctamente, false si el usuario no existe.</returns>
         public static bool DeleteUser(int userId)
         {
             try
@@ -86,7 +104,12 @@ namespace WpfApp1.Model.Managment
             }
         }
 
-        // ➤ NUEVO MÉTODO: Validar login de usuario
+        /// <summary>
+        /// Valida el login de un usuario por nombre de usuario o email y contraseña.
+        /// </summary>
+        /// <param name="usernameOrEmail">Nombre de usuario o email.</param>
+        /// <param name="password">Contraseña del usuario.</param>
+        /// <returns>El objeto <see cref="Users"/> si las credenciales son correctas, o null si no coinciden.</returns>
         public static Users Login(string usernameOrEmail, string password)
         {
             try
@@ -104,11 +127,5 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
-
-       
-        
-        
-       
-        
     }
 }

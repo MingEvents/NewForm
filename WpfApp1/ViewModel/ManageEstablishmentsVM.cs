@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MaterialDesignColors;
 using WpfApp1.Model;
 using WpfApp1.Model.Managment;
 using WpfApp1.Models;
@@ -13,6 +15,10 @@ using WpfApp1.Utilities;
 
 namespace WpfApp1.ViewModel
 {
+    /// <summary>
+    /// ViewModel para la gestión de establecimientos.
+    /// Permite cargar, actualizar y eliminar establecimientos, así como gestionar la selección y edición de sus propiedades.
+    /// </summary>
     public class ManageEstablishmentsVM : ViewModelBase
     {
         private Establishment _selectedEstablishment;
@@ -25,8 +31,14 @@ namespace WpfApp1.ViewModel
 
         #region Propiedades
 
+        /// <summary>
+        /// Lista observable de establecimientos disponibles.
+        /// </summary>
         public ObservableCollection<Establishment> EstablishmentsList { get; set; }
 
+        /// <summary>
+        /// Establecimiento seleccionado actualmente.
+        /// </summary>
         public Establishment SelectedEstablishment
         {
             get => _selectedEstablishment;
@@ -60,36 +72,54 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Nombre del establecimiento.
+        /// </summary>
         public string Name
         {
             get => _name;
             set { _name = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Dirección del establecimiento.
+        /// </summary>
         public string Direction
         {
             get => _direction;
             set { _direction = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Capacidad del establecimiento.
+        /// </summary>
         public int Capacity
         {
             get => _capacity;
             set { _capacity = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// ID de la ciudad asociada al establecimiento.
+        /// </summary>
         public int CityId
         {
             get => _cityId;
             set { _cityId = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Lista de todas las ciudades disponibles.
+        /// </summary>
         public List<City> AllCities
         {
             get => _allCities;
             set { _allCities = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Ciudad seleccionada actualmente.
+        /// </summary>
         public City SelectedCity
         {
             get => _selectedCity;
@@ -106,13 +136,23 @@ namespace WpfApp1.ViewModel
 
         #region Comandos
 
+        /// <summary>
+        /// Comando para actualizar un establecimiento.
+        /// </summary>
         public ICommand UpdateEstablishmentCommand { get; }
+
+        /// <summary>
+        /// Comando para eliminar un establecimiento.
+        /// </summary>
         public ICommand DeleteEstablishmentCommand { get; }
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="ManageEstablishmentsVM"/>.
+        /// </summary>
         public ManageEstablishmentsVM()
         {
             LoadCities();
@@ -126,6 +166,9 @@ namespace WpfApp1.ViewModel
 
         #region Métodos
 
+        /// <summary>
+        /// Carga la lista de establecimientos desde la base de datos.
+        /// </summary>
         private void LoadEstablishments()
         {
             try
@@ -141,6 +184,9 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Carga la lista de ciudades desde la base de datos.
+        /// </summary>
         private void LoadCities()
         {
             try
@@ -154,6 +200,10 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Ejecuta la actualización de los datos del establecimiento seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteUpdate(object obj)
         {
             if (SelectedEstablishment == null)
@@ -187,6 +237,10 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Ejecuta la eliminación del establecimiento seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteDelete(object obj)
         {
             if (SelectedEstablishment == null)
@@ -207,13 +261,13 @@ namespace WpfApp1.ViewModel
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("No se pudo eliminar el establecimiento, comprueba que no tenga eventos asociados", "Error",
+                    System.Windows.MessageBox.Show("Error", "Error",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Error",
+                System.Windows.MessageBox.Show("No se pudo eliminar el establecimiento, comprueba que no tenga eventos asociados", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

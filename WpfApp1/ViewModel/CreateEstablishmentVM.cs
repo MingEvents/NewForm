@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using WpfApp1.Model.Managment;
 using WpfApp1.Utilities;
@@ -81,25 +82,34 @@ namespace WpfApp1.ViewModel
 
         #region Constructor
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="CreateEstablishmentVM"/>.
+        /// </summary>
         public CreateEstablishmentVM()
         {
             CreateEstablishmentCommand = new RelayCommand(ExecuteCreateEstablishment);
             LoadAllCities();
         }
 
-
         #endregion
 
         #region Métodos
 
+        /// <summary>
+        /// Calcula la capacidad del establecimiento en base al número de filas y columnas.
+        /// </summary>
         private void CalculateCapacity()
         {
-            if (NumRows !=null && NumColumns != null)
+            if (NumRows != 0 && NumColumns != 0)
             {
                 Capacity = (NumRows * NumColumns).ToString();
             }
         }
 
+        /// <summary>
+        /// Ejecuta la creación de un nuevo establecimiento.
+        /// </summary>
+        /// <param name="obj">Parámetro opcional del comando (no se utiliza).</param>
         private void ExecuteCreateEstablishment(object obj)
         {
             int cityId = EstablishmentOrm.SlectCityId(SelectedCity);
@@ -124,8 +134,11 @@ namespace WpfApp1.ViewModel
                     if (last != null) establishId = last.establish_id;
                 }
 
+
                 // Insertar las butacas
                 EstablishmentOrm.InsertArmchairsForEstablishment(establishId, NumRows, NumColumns);
+                MessageBox.Show("¡Establecimiento Creado exitosamente!", "Éxito",
+                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 ClearFields();
             }
@@ -137,6 +150,10 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Carga la lista de todas las ciudades disponibles.
+        /// </summary>
+        /// <returns>Lista de nombres de ciudades.</returns>
         private List<string> LoadAllCities()
         {
             try
@@ -154,11 +171,18 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Limpia los campos del formulario de creación.
+        /// </summary>
         private void ClearFields()
         {
             Name = string.Empty;
             Direction = string.Empty;
             Capacity = "";
+            SelectedCity = string.Empty;
+            NumRows = 0;
+            NumColumns = 0;
+
         }
 
         #endregion

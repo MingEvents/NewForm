@@ -7,8 +7,15 @@ using WpfApp1.Models;
 
 namespace WpfApp1.Model.Managment
 {
+    /// <summary>
+    /// Clase ORM para operaciones relacionadas con roles de usuario.
+    /// </summary>
     public static class RoleOrm
     {
+        /// <summary>
+        /// Obtiene una lista con los nombres de todos los roles.
+        /// </summary>
+        /// <returns>Lista de nombres de roles.</returns>
         public static List<string> SlectAllRoles()
         {
             List<Role> roles = new List<Role>();
@@ -28,6 +35,12 @@ namespace WpfApp1.Model.Managment
             }
             return rolesName;
         }
+
+        /// <summary>
+        /// Obtiene el ID de un rol a partir de su nombre.
+        /// </summary>
+        /// <param name="roleName">Nombre del rol.</param>
+        /// <returns>ID del rol, o 0 si no se encuentra.</returns>
         public static int SelectRoleId(string roleName)
         {
             int roleId = 0;
@@ -46,6 +59,12 @@ namespace WpfApp1.Model.Managment
             }
             return roleId;
         }
+
+        /// <summary>
+        /// Obtiene el nombre de un rol a partir de su ID.
+        /// </summary>
+        /// <param name="roleId">ID del rol.</param>
+        /// <returns>Nombre del rol, o cadena vacía si no se encuentra.</returns>
         public static string SelectRoleName(int roleId)
         {
             var roleName = "";

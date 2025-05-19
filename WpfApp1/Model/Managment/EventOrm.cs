@@ -9,8 +9,9 @@ namespace WpfApp1.Model.Managment
     public static class EventOrm
     {
         /// <summary>
-        /// Obtiene una lista de todos los eventos
+        /// Obtiene una lista de todos los eventos.
         /// </summary>
+        /// <returns>Lista de objetos <see cref="Event"/>.</returns>
         public static List<Event> SelectAllEvents()
         {
             List<Event> events = new List<Event>();
@@ -27,8 +28,10 @@ namespace WpfApp1.Model.Managment
         }
 
         /// <summary>
-        /// Inserta un nuevo evento en la base de datos
+        /// Inserta un nuevo evento en la base de datos.
         /// </summary>
+        /// <param name="newEvent">El evento a insertar.</param>
+        /// <returns>True si la inserción fue exitosa, false en caso contrario.</returns>
         public static bool InsertEvent(Event newEvent)
         {
             try
@@ -43,6 +46,12 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+
+        /// <summary>
+        /// Obtiene un evento por su ID.
+        /// </summary>
+        /// <param name="eventId">ID del evento.</param>
+        /// <returns>El objeto <see cref="Event"/> encontrado, o null si no existe.</returns>
         public static Event GetEventById(int eventId)
         {
             try
@@ -55,9 +64,12 @@ namespace WpfApp1.Model.Managment
                 throw new Exception(message);
             }
         }
+
         /// <summary>
-        /// Actualiza un evento existente
+        /// Actualiza un evento existente.
         /// </summary>
+        /// <param name="updatedEvent">El evento con los datos actualizados.</param>
+        /// <returns>True si la actualización fue exitosa, false en caso contrario.</returns>
         public static bool UpdateEvent(Event updatedEvent)
         {
             try
@@ -89,8 +101,10 @@ namespace WpfApp1.Model.Managment
         }
 
         /// <summary>
-        /// Elimina un evento por su ID
+        /// Elimina un evento por su ID.
         /// </summary>
+        /// <param name="eventId">ID del evento a eliminar.</param>
+        /// <returns>True si se eliminó correctamente, false en caso contrario.</returns>
         public static bool DeleteEvent(int eventId)
         {
             try

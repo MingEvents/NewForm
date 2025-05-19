@@ -10,6 +10,10 @@ using System.Collections.Generic;
 
 namespace WpfApp1.ViewModel
 {
+    /// <summary>
+    /// ViewModel para la gestión de eventos en la aplicación.
+    /// Permite cargar, actualizar y eliminar eventos, así como gestionar la selección y edición de sus propiedades.
+    /// </summary>
     public class ManageEventsVM : ViewModelBase
     {
         private Event _selectedEvent;
@@ -27,8 +31,14 @@ namespace WpfApp1.ViewModel
 
         #region Propiedades
 
+        /// <summary>
+        /// Lista observable de eventos disponibles.
+        /// </summary>
         public ObservableCollection<Event> EventsList { get; set; }
 
+        /// <summary>
+        /// Evento seleccionado actualmente.
+        /// </summary>
         public Event SelectedEvent
         {
             get => _selectedEvent;
@@ -77,66 +87,99 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Nombre del evento.
+        /// </summary>
         public string Name
         {
             get => _name;
             set { _name = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Precio del evento.
+        /// </summary>
         public int Price
         {
             get => _price;
             set { _price = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Plazas reservadas para el evento.
+        /// </summary>
         public int ReservedPlaces
         {
             get => _reservedPlaces;
             set { _reservedPlaces = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Ruta o URL de la foto del evento.
+        /// </summary>
         public string Photo
         {
             get => _photo;
             set { _photo = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Fecha de inicio del evento.
+        /// </summary>
         public string StartDate
         {
             get => _startDate;
             set { _startDate = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Fecha de fin del evento.
+        /// </summary>
         public string EndDate
         {
             get => _endDate;
             set { _endDate = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Indica si el evento tiene asientos numerados.
+        /// </summary>
         public bool Seating
         {
             get => _seating;
             set { _seating = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Descripción del evento.
+        /// </summary>
         public string Description
         {
             get => _description;
             set { _description = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// ID del establecimiento asociado al evento.
+        /// </summary>
         public int EstablishId
         {
             get => _establishId;
             set { _establishId = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Lista de todos los establecimientos disponibles.
+        /// </summary>
         public List<Establishment> AllEstablishments
         {
             get => _allEstablishments;
             set { _allEstablishments = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Establecimiento seleccionado para el evento.
+        /// </summary>
         public Establishment SelectedEstablishment
         {
             get => _selectedEstablishment;
@@ -153,13 +196,23 @@ namespace WpfApp1.ViewModel
 
         #region Comandos
 
+        /// <summary>
+        /// Comando para eliminar un evento.
+        /// </summary>
         public ICommand DeleteEventCommand { get; }
+
+        /// <summary>
+        /// Comando para actualizar un evento.
+        /// </summary>
         public ICommand UpdateEventCommand { get; }
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="ManageEventsVM"/>.
+        /// </summary>
         public ManageEventsVM()
         {
             LoadEstablishments();
@@ -173,6 +226,9 @@ namespace WpfApp1.ViewModel
 
         #region Métodos
 
+        /// <summary>
+        /// Carga la lista de eventos desde la base de datos.
+        /// </summary>
         private void LoadEvents()
         {
             try
@@ -188,6 +244,9 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Carga la lista de establecimientos desde la base de datos.
+        /// </summary>
         private void LoadEstablishments()
         {
             try
@@ -201,6 +260,10 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Ejecuta la eliminación del evento seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteDeleteEvent(object obj)
         {
             if (SelectedEvent == null)
@@ -227,11 +290,15 @@ namespace WpfApp1.ViewModel
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Error",
+                System.Windows.MessageBox.Show("No se pudo eliminar el evento, comprueba que no tenga nínguna clave foránea asociada", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        /// <summary>
+        /// Ejecuta la actualización de los datos del evento seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteUpdateEvent(object obj)
         {
             if (SelectedEvent == null)

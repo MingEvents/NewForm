@@ -10,8 +10,10 @@ using WpfApp1.Models;
 
 namespace WpfApp1.ViewModel
 {
-    
-
+    /// <summary>
+    /// ViewModel para la gestión de usuarios en la aplicación.
+    /// Permite cargar, actualizar y eliminar usuarios, así como gestionar sus reservas y tickets.
+    /// </summary>
     public class ManageUsersVM : ViewModelBase
     {
         private Users _selectedUser;
@@ -23,8 +25,14 @@ namespace WpfApp1.ViewModel
 
         #region Propiedades
 
+        /// <summary>
+        /// Lista observable de usuarios disponibles.
+        /// </summary>
         public ObservableCollection<Users> UsersList { get; set; }
 
+        /// <summary>
+        /// Usuario seleccionado actualmente.
+        /// </summary>
         public Users SelectedUser
         {
             get => _selectedUser;
@@ -48,29 +56,46 @@ namespace WpfApp1.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Nombre del usuario seleccionado.
+        /// </summary>
         public string Name
         {
             get => _name;
             set { _name = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Email del usuario seleccionado.
+        /// </summary>
         public string Email
         {
             get => _email;
             set { _email = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Teléfono del usuario seleccionado.
+        /// </summary>
         public string Phone
         {
             get => _phone;
             set { _phone = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Lista de tickets reservados por el usuario seleccionado.
+        /// </summary>
         public ObservableCollection<Reserve_Ticket> UserTickets
         {
             get => _userTickets;
             set { _userTickets = value; OnPropertyChanged(); }
         }
+
+        /// <summary>
+        /// Lista de eventos reservados por el usuario seleccionado.
+        /// </summary>
         public ObservableCollection<Event> UserEvents
         {
             get => _userEvents;
@@ -81,14 +106,28 @@ namespace WpfApp1.ViewModel
 
         #region Comandos
 
+        /// <summary>
+        /// Comando para eliminar un usuario.
+        /// </summary>
         public ICommand DeleteUserCommand { get; }
+
+        /// <summary>
+        /// Comando para actualizar un usuario.
+        /// </summary>
         public ICommand UpdateUserCommand { get; }
+
+        /// <summary>
+        /// Comando para actualizar un ticket.
+        /// </summary>
         public ICommand UpdateTicketCommand { get; }
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="ManageUsersVM"/>.
+        /// </summary>
         public ManageUsersVM()
         {
             LoadUsers();
@@ -101,6 +140,9 @@ namespace WpfApp1.ViewModel
 
         #region Métodos
 
+        /// <summary>
+        /// Carga la lista de usuarios desde la base de datos.
+        /// </summary>
         private void LoadUsers()
         {
             try
@@ -116,6 +158,9 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Carga la lista de tickets reservados por el usuario seleccionado.
+        /// </summary>
         private void LoadUserTickets()
         {
             if (SelectedUser == null)
@@ -126,10 +171,13 @@ namespace WpfApp1.ViewModel
             var tickets = Reserve_TicketOrm.SelectTicket(SelectedUser.user_id);
             UserTickets = new ObservableCollection<Reserve_Ticket>(tickets);
         }
+
         /*
+        /// <summary>
+        /// Carga la lista de eventos reservados por el usuario seleccionado.
+        /// </summary>
         private void LoadUserEvents()
         {
-
             if (UserTickets == null)
             {
                 foreach (var ticket in UserTickets)
@@ -144,13 +192,23 @@ namespace WpfApp1.ViewModel
         }
         */
 
+        /// <summary>
+        /// Ejecuta la actualización de los datos del usuario seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteUpdateUser(object obj)
         {
             if (SelectedUser == null) return;
 
             try
             {
+                SelectedUser.name = Name;
+                SelectedUser.email = Email;
+                SelectedUser.phone = int.TryParse(Phone, out int phoneValue) ? phoneValue : 0;
+
                 var result = UsersOrm.UpdateUser(SelectedUser);
+                System.Windows.MessageBox.Show("Usuario actualizado exitosamente.", "Éxito",
+                   MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -159,6 +217,10 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        /// <summary>
+        /// Ejecuta la eliminación del usuario seleccionado.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteDeleteUser(object obj)
         {
             if (SelectedUser == null)
@@ -185,11 +247,15 @@ namespace WpfApp1.ViewModel
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Error",
+                System.Windows.MessageBox.Show("No se pudo eliminar el usuario, comrpueba que no tenga reservas hechas", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        /// <summary>
+        /// Ejecuta la actualización de un ticket reservado por el usuario.
+        /// </summary>
+        /// <param name="obj">Parámetro del comando (debe ser un <see cref="Reserve_Ticket"/>).</param>
         private void ExecuteUpdateTicket(object obj)
         {
             if (obj is Reserve_Ticket ticket)

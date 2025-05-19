@@ -42,13 +42,13 @@
                     <!-- Dirección -->
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
                         <TextBlock Text="Dirección" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox IsReadOnly="True" Text="{Binding Direction, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox  Text="{Binding Direction, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
 
                     <!-- Capacidad -->
                     <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
                         <TextBlock Text="Capacidad" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                        <TextBox Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
+                        <TextBox  IsReadOnly="True" Text="{Binding Capacity, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:N0}}" />
                     </StackPanel>
                     <!-- Lista de ciudades -->
                     <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
