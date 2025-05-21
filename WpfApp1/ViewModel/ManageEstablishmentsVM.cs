@@ -213,6 +213,17 @@ namespace WpfApp1.ViewModel
                 return;
             }
 
+            // Validaciones de campos obligatorios
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Direction) ||
+                Capacity <= 0 ||
+                SelectedCity == null)
+            {
+                System.Windows.MessageBox.Show("Por favor, rellena todos los campos obligatorios antes de actualizar.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
                 var establishmentToUpdate = Orm.db.Establishment.Find(SelectedEstablishment.establish_id);

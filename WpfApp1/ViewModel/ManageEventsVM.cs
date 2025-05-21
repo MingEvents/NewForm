@@ -21,8 +21,8 @@ namespace WpfApp1.ViewModel
         private int _price;
         private int _reservedPlaces;
         private string _photo;
-        private string _startDate;
-        private string _endDate;
+        private DateTime? _startDate;
+        private DateTime? _endDate;
         private bool _seating;
         private string _description;
         private int _establishId;
@@ -51,8 +51,8 @@ namespace WpfApp1.ViewModel
                     Price = 0;
                     ReservedPlaces = 0;
                     Photo = string.Empty;
-                    StartDate = string.Empty;
-                    EndDate = string.Empty;
+                    StartDate = null;
+                    EndDate = null;
                     Description = string.Empty;
                     EstablishId = 0;
                     SelectedEstablishment = null;
@@ -65,8 +65,9 @@ namespace WpfApp1.ViewModel
                     Price = _selectedEvent.price;
                     ReservedPlaces = _selectedEvent.reserved_places;
                     Photo = _selectedEvent.photo;
-                    StartDate = _selectedEvent.start_date;
-                    EndDate = _selectedEvent.end_date;
+                    DateTime tempStart, tempEnd;
+                    StartDate = DateTime.TryParse(_selectedEvent.start_date, out tempStart) ? (DateTime?)tempStart : null;
+                    EndDate = DateTime.TryParse(_selectedEvent.end_date, out tempEnd) ? (DateTime?)tempEnd : null;
                     Seating = _selectedEvent.seating;
                     Description = _selectedEvent.descripcion;
                     EstablishId = _selectedEvent.establish_id;
@@ -126,7 +127,7 @@ namespace WpfApp1.ViewModel
         /// <summary>
         /// Fecha de inicio del evento.
         /// </summary>
-        public string StartDate
+        public DateTime? StartDate
         {
             get => _startDate;
             set { _startDate = value; OnPropertyChanged(); }
@@ -135,7 +136,7 @@ namespace WpfApp1.ViewModel
         /// <summary>
         /// Fecha de fin del evento.
         /// </summary>
-        public string EndDate
+        public DateTime? EndDate
         {
             get => _endDate;
             set { _endDate = value; OnPropertyChanged(); }
@@ -308,6 +309,19 @@ namespace WpfApp1.ViewModel
                 return;
             }
 
+            // Validaciones de campos obligatorios
+            if (StartDate == null || EndDate == null ||
+                string.IsNullOrWhiteSpace(Name) ||
+                Price <= 0 ||
+                ReservedPlaces < 0 ||
+                string.IsNullOrWhiteSpace(Description) ||
+                SelectedEstablishment == null)
+            {
+                System.Windows.MessageBox.Show("Por favor, rellena todos los campos obligatorios antes de actualizar.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
                 var eventToUpdate = Orm.db.Event.Find(SelectedEvent.event_id);
@@ -318,8 +332,8 @@ namespace WpfApp1.ViewModel
                     eventToUpdate.price = this.Price;
                     eventToUpdate.reserved_places = this.ReservedPlaces;
                     eventToUpdate.photo = this.Photo;
-                    eventToUpdate.start_date = this.StartDate;
-                    eventToUpdate.end_date = this.EndDate;
+                    eventToUpdate.start_date = StartDate?.ToString("yyyy-MM-dd") ?? "";
+                    eventToUpdate.end_date = EndDate?.ToString("yyyy-MM-dd") ?? "";
                     eventToUpdate.seating = this.Seating;
                     eventToUpdate.descripcion = this.Description;
                     eventToUpdate.establish_id = this.SelectedEstablishment?.establish_id ?? 0;

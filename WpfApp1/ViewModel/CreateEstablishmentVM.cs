@@ -112,6 +112,19 @@ namespace WpfApp1.ViewModel
         /// <param name="obj">Parámetro opcional del comando (no se utiliza).</param>
         private void ExecuteCreateEstablishment(object obj)
         {
+            // Comprobación de que ningún dato obligatorio esté vacío o nulo
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Direction) ||
+                string.IsNullOrWhiteSpace(Capacity) ||
+                string.IsNullOrWhiteSpace(SelectedCity) ||
+                NumRows <= 0 ||
+                NumColumns <= 0)
+            {
+                MessageBox.Show("Por favor, rellena todos los campos obligatorios.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             int cityId = EstablishmentOrm.SlectCityId(SelectedCity);
             try
             {
@@ -133,7 +146,6 @@ namespace WpfApp1.ViewModel
                     var last = EstablishmentOrm.GetEstablishmentById(newEstablishment.establish_id);
                     if (last != null) establishId = last.establish_id;
                 }
-
 
                 // Insertar las butacas
                 EstablishmentOrm.InsertArmchairsForEstablishment(establishId, NumRows, NumColumns);

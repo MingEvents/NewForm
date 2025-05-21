@@ -200,11 +200,23 @@ namespace WpfApp1.ViewModel
         {
             if (SelectedUser == null) return;
 
+            // Validaciones de campos obligatorios
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Email) ||
+                string.IsNullOrWhiteSpace(Phone) ||
+                !int.TryParse(Phone, out int phoneValue) ||
+                phoneValue <= 0)
+            {
+                System.Windows.MessageBox.Show("Por favor, rellena todos los campos obligatorios correctamente antes de actualizar.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
                 SelectedUser.name = Name;
                 SelectedUser.email = Email;
-                SelectedUser.phone = int.TryParse(Phone, out int phoneValue) ? phoneValue : 0;
+                SelectedUser.phone = phoneValue;
 
                 var result = UsersOrm.UpdateUser(SelectedUser);
                 System.Windows.MessageBox.Show("Usuario actualizado exitosamente.", "Éxito",

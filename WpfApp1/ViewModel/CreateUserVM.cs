@@ -143,9 +143,20 @@ namespace WpfApp1.ViewModel
         /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteCreateUser(object obj)
         {
-            int roleId;
+            int roleId = RoleOrm.SelectRoleId(SelectedRole);
 
-            roleId = RoleOrm.SelectRoleId(SelectedRole);
+            // Comprobación de que ningún dato esté vacío o nulo
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(SecondName) ||
+                string.IsNullOrWhiteSpace(Email) ||
+                string.IsNullOrWhiteSpace(Password) ||
+                Phone == 0 ||
+                string.IsNullOrWhiteSpace(SelectedRole))
+            {
+                MessageBox.Show("Por favor, rellena todos los campos obligatorios.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             try
             {

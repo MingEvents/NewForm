@@ -231,6 +231,20 @@ namespace WpfApp1.ViewModel
         /// <param name="obj">Parámetro del comando (no se utiliza).</param>
         private void ExecuteCreateEvent(object obj)
         {
+            // Comprobación de que ningún dato obligatorio esté vacío o nulo
+            if (string.IsNullOrWhiteSpace(Name) ||
+                Price <= 0 ||
+                ReservedPlaces < 0 ||
+                string.IsNullOrWhiteSpace(StartDate) ||
+                string.IsNullOrWhiteSpace(EndDate) ||
+                string.IsNullOrWhiteSpace(Description) ||
+                SelectedEstablishment == null)
+            {
+                MessageBox.Show("Por favor, rellena todos los campos obligatorios.", "Campos incompletos",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
                 var newEvent = new Event
